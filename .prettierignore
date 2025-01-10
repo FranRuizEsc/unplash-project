@@ -1,0 +1,14 @@
+/dist
+/coverage
+/documentation
+/.scannerwork
+/libs/**/test-data/*.mock.ts
+/libs/**/tests/data/*.mock.ts
+/libs/**/test-data/*.mock.json
+/libs/**/tests/data/*.mock.json
+/utils/**/*-stubs.ts
+
+.angular
+
+/.nx/cache
+/libs/assets/polyfills/scroll-timeline-polyfill.js
