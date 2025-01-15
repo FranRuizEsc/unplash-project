@@ -1,14 +1,14 @@
 import { environment } from '../../../../environments/environment';
-import { MainService } from './../../../services/main.service';
+import { MainService } from '../../../services/main.service';
 import { Component, inject, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-photos-list',
   imports: [],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+  templateUrl: './photos-list.component.html',
+  styleUrl: './photos-list.component.scss'
 })
-export class MainComponent implements OnInit {
+export class PhotosListComponent implements OnInit {
 
   private mainService = inject(MainService);
 
