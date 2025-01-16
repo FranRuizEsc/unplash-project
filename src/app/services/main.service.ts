@@ -9,7 +9,7 @@ export class MainService {
 
   private http = inject(HttpClient);
 
-  getAllPhtos() {
-    return this.http.get<any>(environment.apiUrl + '/photos');
+  getAllPhtos(page: number = 1) {
+    return this.http.get<any>(environment.apiUrl + '/photos', { params: { page } });
   }
 }
