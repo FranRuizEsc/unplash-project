@@ -1,0 +1,9 @@
+.photo-container {
+	columns: 5 200px;
+	column-gap: 10px;
+
+	.photo-card {
+		margin-bottom: 10px;
+		display: block;
+	}
+}
