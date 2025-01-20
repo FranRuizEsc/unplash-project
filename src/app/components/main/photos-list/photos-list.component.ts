@@ -1,27 +1,42 @@
 import { MainService } from '../../../services/main.service';
 import { Component, inject, OnInit } from '@angular/core';
 import { PhotoCardComponent } from '../photo-card/photo-card/photo-card.component';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { VirtualScrollerModule } from '@iharbeck/ngx-virtual-scroller';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-photos-list',
-  imports: [PhotoCardComponent],
+  imports: [PhotoCardComponent, NgScrollbarModule, VirtualScrollerModule, CommonModule],
   templateUrl: './photos-list.component.html',
   styleUrl: './photos-list.component.scss'
 })
 export class PhotosListComponent implements OnInit {
-
   private mainService = inject(MainService);
+  private page = 1
   protected photos: any[] = [];
 
 
   ngOnInit() {
-    this.getAllPhotos();
+    this.page = 1;
+    this.getAllPhotos(this.page);
   }
 
-  private getAllPhotos() {
-    this.mainService.getAllPhtos().subscribe((data) => {
-      console.log('data', data)
-      this.photos = data;
-    })
+  protected loadMorePhotos() {
+    this.page++;
+    this.getAllPhotos(this.page);
+  }
+
+  private getAllPhotos(page: number) {
+    this.mainService.getAllPhtos(page).subscribe((data) => {
+      if (this.page === 1) {
+        this.photos = data;
+      } else {
+        this.photos = [...this.photos, ...data].filter((photo, index, self) =>
+          index === self.findIndex((p) => p.id === photo.id)
+        );
+      }
+    });
+
   }
 }

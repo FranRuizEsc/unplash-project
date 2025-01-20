@@ -11,6 +11,5 @@ export class PhotoCardComponent {
 
 
   ngOnInit() {
-    console.log('photo', this.photo)
   }
 }
