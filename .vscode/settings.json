@@ -1,0 +1,39 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.activeBorder": "#16c916",
+    "activityBar.foreground": "#16c916",
+    "activityBar.background": "#0e0e0e",
+    "activityBarBadge.foreground": "#000000",
+    "activityBarBadge.background": "#FFE600",
+    "editorGroup.border": "#16c916",
+    "panel.border": "#16c916",
+    "sash.hoverBorder": "#16c916",
+    "sideBar.border": "#16c916",
+    "statusBar.background": "#0b8b0b",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#16c916",
+    "statusBarItem.remoteBackground": "#119b11",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "tab.activeBorder": "#16c916"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.removeUnusedImports": "explicit"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
+}
