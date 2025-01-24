@@ -1,6 +1,6 @@
 import { MainService } from '../../services/main.service';
 import { Component, inject, OnInit } from '@angular/core';
-import { PhotoCardComponent } from '../photo-card/photo-card.component';
+import { PhotoCardComponent } from '../../shared/components/photo-card/photo-card.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { VirtualScrollerModule } from '@iharbeck/ngx-virtual-scroller';
 import { CommonModule } from '@angular/common';

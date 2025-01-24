@@ -25,7 +25,7 @@ export class SearcherHeaderComponent {
     this.mainService.searchPhotos(this.searchTerm, 1).subscribe((data) => {
       console.log(data)
 
-      this.router.navigate(['/search'], { queryParams: { query: this.searchTerm } });
+      this.router.navigate(['/search'], { queryParams: { searchTerm: this.searchTerm } });
     });
 
   }
