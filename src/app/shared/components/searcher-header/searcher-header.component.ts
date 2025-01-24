@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MainService } from '../../../services/main.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'searcher-header',
@@ -13,13 +15,18 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './searcher-header.component.scss'
 })
 export class SearcherHeaderComponent {
+  private mainService = inject(MainService);
+  private router = inject(Router);
+
   protected searchTerm: string = '';
 
-  ngOnInit() {
-    // console.log(this.searchTerm)
-  }
-
   search() {
-    console.log(this.searchTerm)
+    // console.log(this.searchTerm)
+    this.mainService.searchPhotos(this.searchTerm, 1).subscribe((data) => {
+      console.log(data)
+
+      this.router.navigate(['/search'], { queryParams: { query: this.searchTerm } });
+    });
+
   }
 }

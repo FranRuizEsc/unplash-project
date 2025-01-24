@@ -12,4 +12,8 @@ export class MainService {
   getAllPhtos(page: number = 1) {
     return this.http.get<any>(environment.apiUrl + '/photos', { params: { page } });
   }
+
+  searchPhotos(query: string, page: number = 1) {
+    return this.http.get<any>(environment.apiUrl + '/search/photos', { params: { page, query } });
+  }
 }
