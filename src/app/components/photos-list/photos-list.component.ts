@@ -15,13 +15,10 @@ export class PhotosListComponent implements OnInit {
   private mainService = inject(MainService);
   private page = 1
 
-  protected photosList: any[] = [];
+  protected listPhotos: any[] = [];
 
 
   ngOnInit() {
-    this.page = 1;
-    this.photosList = [];
-
     if (this.searchTerm) {
       this.searchPhotos(this.searchTerm, this.page);
     } else {
@@ -40,9 +37,9 @@ export class PhotosListComponent implements OnInit {
 
   private updatePhotosList(newPhotos: any[]) {
     if (this.page === 1) {
-      this.photosList = newPhotos;
+      this.listPhotos = newPhotos;
     } else {
-      this.photosList = [...this.photosList, ...newPhotos].filter((photo, index, self) =>
+      this.listPhotos = [...this.listPhotos, ...newPhotos].filter((photo, index, self) =>
         index === self.findIndex((p) => p.id === photo.id)
       );
     }
