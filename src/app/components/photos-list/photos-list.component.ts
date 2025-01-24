@@ -14,8 +14,8 @@ export class PhotosListComponent implements OnInit {
 
   private mainService = inject(MainService);
   private page = 1
+
   protected photosList: any[] = [];
-  protected searchResult: any[] = [];
 
 
   ngOnInit() {
@@ -23,10 +23,8 @@ export class PhotosListComponent implements OnInit {
     this.photosList = [];
 
     if (this.searchTerm) {
-      console.log('searchTerm', this.searchTerm);
       this.searchPhotos(this.searchTerm, this.page);
     } else {
-      console.log('else')
       this.getAllPhotos(this.page);
     }
   }
@@ -40,28 +38,27 @@ export class PhotosListComponent implements OnInit {
     }
   }
 
+  private updatePhotosList(newPhotos: any[]) {
+    if (this.page === 1) {
+      this.photosList = newPhotos;
+    } else {
+      this.photosList = [...this.photosList, ...newPhotos].filter((photo, index, self) =>
+        index === self.findIndex((p) => p.id === photo.id)
+      );
+    }
+  }
+
   private getAllPhotos(page: number) {
     this.mainService.getAllPhtos(page).subscribe((data) => {
-      if (this.page === 1) {
-        this.photosList = data;
-      } else {
-        this.photosList = [...this.photosList, ...data].filter((photo, index, self) =>
-          index === self.findIndex((p) => p.id === photo.id)
-        );
-      }
+      this.updatePhotosList(data);
     });
   }
 
   private searchPhotos(searchTerm: string, page: number) {
     this.mainService.searchPhotos(searchTerm, page).subscribe((data) => {
-
-      if (this.page === 1) {
-        this.photosList = data.results;
-      } else {
-        this.photosList = [...this.photosList, ...data.results].filter((photo, index, self) =>
-          index === self.findIndex((p) => p.id === photo.id)
-        );
-      }
+      this.updatePhotosList(data.results);
     });
   }
+
+
 }
