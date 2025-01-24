@@ -5,8 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MainService } from '../../../services/main.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'searcher-header',
@@ -15,18 +15,30 @@ import { Router } from '@angular/router';
   styleUrl: './searcher-header.component.scss'
 })
 export class SearcherHeaderComponent {
-  private mainService = inject(MainService);
+
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private subscription = new Subscription()
 
   protected searchTerm: string = '';
 
-  search() {
-    // console.log(this.searchTerm)
-    this.mainService.searchPhotos(this.searchTerm, 1).subscribe((data) => {
-      console.log(data)
+  ngOnInit() {
+    const queryParams$ = this.route.queryParams
 
-      this.router.navigate(['/search'], { queryParams: { searchTerm: this.searchTerm } });
-    });
+    this.subscription.add(queryParams$.subscribe((queryParams) => {
+      this.searchTerm = queryParams['searchTerm'];
+    }))
+  }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  protected search() {
+    this.router.navigate(['/search'], { queryParams: { searchTerm: this.searchTerm } });
+  }
+
+  protected clearSearchTerm() {
+    this.router.navigate(['/']);
   }
 }
