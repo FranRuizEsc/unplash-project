@@ -1,0 +1,7 @@
+<mat-form-field>
+  <button matPrefix mat-icon-button (click)="search()">
+    <mat-icon>search</mat-icon>
+  </button>
+  <!-- <input type="text" matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup)="search(searchTerm)" /> -->
+  <input type="search" matInput placeholder="Search" [(ngModel)]="searchTerm" />
+</mat-form-field>

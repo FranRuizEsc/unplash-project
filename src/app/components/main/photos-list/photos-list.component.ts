@@ -1,12 +1,12 @@
 import { MainService } from '../../../services/main.service';
 import { Component, inject, OnInit } from '@angular/core';
-import { PhotoCardComponent } from '../photo-card/photo-card/photo-card.component';
+import { PhotoCardComponent } from '../../photo-card/photo-card.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { VirtualScrollerModule } from '@iharbeck/ngx-virtual-scroller';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-photos-list',
+  selector: 'photos-list',
   imports: [PhotoCardComponent, NgScrollbarModule, VirtualScrollerModule, CommonModule],
   templateUrl: './photos-list.component.html',
   styleUrl: './photos-list.component.scss'
