@@ -1,11 +1,20 @@
-<mat-form-field>
-  <button matPrefix mat-icon-button (click)="search()">
-    <mat-icon>search</mat-icon>
-  </button>
-  <input type="text" matInput placeholder="Search" [(ngModel)]="searchTerm" (keyup.enter)="search()" />
-  @if (searchTerm) {
-  <button matSuffix mat-icon-button (click)="clearSearchTerm()">
-    <mat-icon>close</mat-icon>
-  </button>
-  }
-</mat-form-field>
+<form (ngSubmit)="search()" class="search-form">
+  <div class="search-container">
+    <button mat-icon-button type="button" class="search-button" (click)="search()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <input
+      type="text"
+      class="search-input"
+      placeholder="Search"
+      [(ngModel)]="searchTerm"
+      name="searchTerm"
+      (keyup.enter)="search()"
+    />
+    @if(searchTerm) {
+    <button mat-icon-button type="button" class="close-button" (click)="clearSearchTerm()">
+      <mat-icon>close</mat-icon>
+    </button>
+    }
+  </div>
+</form>

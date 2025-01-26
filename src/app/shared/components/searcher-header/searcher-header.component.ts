@@ -39,6 +39,7 @@ export class SearcherHeaderComponent {
   }
 
   protected clearSearchTerm() {
+    this.searchTerm = '';
     this.router.navigate(['/']);
   }
 }
