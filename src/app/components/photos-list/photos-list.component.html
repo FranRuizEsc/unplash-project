@@ -1,7 +1,6 @@
 <div class="photo-container">
-  @for (photo of photos; track photo) {
-  <photo-card class="photo-card" [photo]="photo"></photo-card>
-  }
+  @for (photo of listPhotos; track photo) {
+  <photo-card class="photo-card" [photo]="photo"></photo-card> }
 </div>
 
 <button class="load-more" (click)="loadMorePhotos()">Load more</button>
