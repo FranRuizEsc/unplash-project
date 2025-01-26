@@ -1,8 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
-    // const token = environment.apiKey
-    const token = 'HfShdtTT-I55evG98MofLILhoZUD6pYTgSDGhAefHwU'
+    const token = environment.apiKey
 
     if (token) {
         req = req.clone({
