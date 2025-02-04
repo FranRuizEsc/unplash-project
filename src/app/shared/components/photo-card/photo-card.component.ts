@@ -8,8 +8,4 @@ import { Component, Input } from '@angular/core';
 })
 export class PhotoCardComponent {
   @Input({ required: true }) photo: any;
-
-
-  ngOnInit() {
-  }
 }

@@ -2,10 +2,13 @@ import { MainService } from '../../services/main.service';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { PhotoCardComponent } from '../../shared/components/photo-card/photo-card.component';
 import { CommonModule } from '@angular/common';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { tap } from 'rxjs/internal/operators/tap';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'photos-list',
-  imports: [PhotoCardComponent, CommonModule],
+  imports: [PhotoCardComponent, CommonModule, ScrollingModule, MatProgressSpinnerModule],
   templateUrl: './photos-list.component.html',
   styleUrl: './photos-list.component.scss'
 })
@@ -15,14 +18,18 @@ export class PhotosListComponent implements OnInit {
   private mainService = inject(MainService);
   private page = 1
 
+  protected isLoading = false;
   protected listPhotos: any[] = [];
 
 
   ngOnInit() {
-    if (this.searchTerm) {
-      this.searchPhotos(this.searchTerm, this.page);
-    } else {
-      this.getAllPhotos(this.page);
+    this.loadInitialPhotos();
+  }
+
+  onScroll(event: any) {
+    const { scrollTop, scrollHeight, clientHeight } = event.target;
+    if (scrollTop + clientHeight >= scrollHeight - 100) {
+      this.loadMorePhotos();
     }
   }
 
@@ -35,27 +42,40 @@ export class PhotosListComponent implements OnInit {
     }
   }
 
-  private updatePhotosList(newPhotos: any[]) {
-    if (this.page === 1) {
-      this.listPhotos = newPhotos;
+  private loadInitialPhotos() {
+    this.isLoading = true;
+    if (this.searchTerm) {
+      this.searchPhotos(this.searchTerm, this.page);
     } else {
-      this.listPhotos = [...this.listPhotos, ...newPhotos].filter((photo, index, self) =>
-        index === self.findIndex((p) => p.id === photo.id)
-      );
+      this.getAllPhotos(this.page);
     }
   }
 
+  private updatePhotosList(newPhotos: any[]) {
+    const existingIds = new Set(this.listPhotos.map((photo) => photo.id));
+    const filteredPhotos = newPhotos.filter((photo) => !existingIds.has(photo.id));
+
+    this.listPhotos = [...this.listPhotos, ...filteredPhotos];
+    this.listPhotos.sort((a, b) => a.id.localeCompare(b.id));
+
+    this.isLoading = false;
+  }
+
   private getAllPhotos(page: number) {
-    this.mainService.getAllPhtos(page).subscribe((data) => {
-      this.updatePhotosList(data);
-    });
+    this.mainService.getAllPhtos(page).pipe(
+      tap((data) => {
+        this.updatePhotosList(data);
+        this.isLoading = false;
+      })
+    ).subscribe();
   }
 
   private searchPhotos(searchTerm: string, page: number) {
-    this.mainService.searchPhotos(searchTerm, page).subscribe((data) => {
-      this.updatePhotosList(data.results);
-    });
+    this.mainService.searchPhotos(searchTerm, page).pipe(
+      tap((data) => {
+        this.updatePhotosList(data.results);
+        this.isLoading = false;
+      })
+    ).subscribe();
   }
-
-
 }

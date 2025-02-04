@@ -1,6 +1,10 @@
-<div class="photo-container">
+<div class="photo-container" (scroll)="onScroll($event)">
   @for (photo of listPhotos; track photo) {
   <photo-card class="photo-card" [photo]="photo"></photo-card> }
 </div>
 
-<button class="load-more" (click)="loadMorePhotos()">Load more</button>
+@if(isLoading) {
+<div class="loading">
+  <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
+</div>
+}
