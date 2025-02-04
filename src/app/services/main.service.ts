@@ -10,10 +10,10 @@ export class MainService {
   private http = inject(HttpClient);
 
   getAllPhtos(page: number = 1) {
-    return this.http.get<any>(environment.apiUrl + '/photos', { params: { page } });
+    return this.http.get<any>(environment.apiUrl + '/photos', { params: { page, per_page: 15 } });
   }
 
   searchPhotos(query: string, page: number = 1) {
-    return this.http.get<any>(environment.apiUrl + '/search/photos', { params: { page, query } });
+    return this.http.get<any>(environment.apiUrl + '/search/photos', { params: { page, per_page: 15, query } });
   }
 }
