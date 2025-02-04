@@ -56,8 +56,6 @@ export class PhotosListComponent implements OnInit {
     const filteredPhotos = newPhotos.filter((photo) => !existingIds.has(photo.id));
 
     this.listPhotos = [...this.listPhotos, ...filteredPhotos];
-    this.listPhotos.sort((a, b) => a.id.localeCompare(b.id));
-
     this.isLoading = false;
   }
 

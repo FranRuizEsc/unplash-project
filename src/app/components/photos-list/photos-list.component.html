@@ -1,5 +1,5 @@
 <div class="photo-container" (scroll)="onScroll($event)">
-  @for (photo of listPhotos; track photo) {
+  @for (photo of listPhotos; track photo.id) {
   <photo-card class="photo-card" [photo]="photo"></photo-card> }
 </div>
 
