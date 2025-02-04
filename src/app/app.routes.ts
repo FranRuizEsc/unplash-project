@@ -7,6 +7,6 @@ export const ROUTES: Route[] = [
 	},
 	{
 		path: 'search',
-		loadComponent: () => import('./components/search-result/search-result/search-result.component').then((m) => m.SearchResultComponent),
+		loadComponent: () => import('./components/search-result/search-result.component').then((m) => m.SearchResultComponent),
 	}
 ]
