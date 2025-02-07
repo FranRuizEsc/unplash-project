@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, Inject, Optional } from '@angular/core';
 import { MainService } from '../../services/main.service';
+import { ActivatedRoute } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-photo-detail',
@@ -11,23 +11,30 @@ import { MainService } from '../../services/main.service';
 })
 export class PhotoDetailComponent {
 
-  private mainService = inject(MainService)
-  private route = inject(ActivatedRoute);
-  private subscription = new Subscription();
   private photoId: string
 
-
-  ngOnInit() {
-    const queryParams$ = this.route.params
-
-    this.subscription.add(queryParams$.subscribe((queryParams) => {
-      this.photoId = queryParams['photo_id']
-    }))
-
-    this.getPhotoDeatils(this.photoId)
+  constructor(
+    private route: ActivatedRoute,
+    private mainService: MainService,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: string },
+    @Optional() public dialogRef: MatDialogRef<PhotoDetailComponent>
+  ) {
+    console.log(data)
+    this.photoId = data?.id
   }
 
-  private getPhotoDeatils(id: string) {
+  ngOnInit() {
+    if (!this.photoId) {
+      this.route.params.subscribe(params => {
+        this.photoId = params['photo_id'];
+        this.getPhotoDetails(this.photoId);
+      });
+    } else {
+      this.getPhotoDetails(this.photoId);
+    }
+  }
+
+  private getPhotoDetails(id: string) {
     this.mainService.getPhotoById(id).subscribe((res: any) => {
       console.log('res', res)
     })
