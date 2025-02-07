@@ -17,7 +17,6 @@ export class PhotoCardComponent {
     history.pushState(null, '', `/photo/${photoId}`);
 
     const dialog = this.matDialog.open(PhotoDetailComponent, {
-      width: '70%',
       data: { id: photoId }
     });
 

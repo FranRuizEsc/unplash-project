@@ -1,0 +1,66 @@
+$secondary-color: #767676;
+$spacing: 20px;
+
+.photo-detail-container {
+  margin: 0 auto;
+  padding: $spacing;
+  font-family: 'Helvetica Neue', sans-serif;
+  color: black;
+  height: 100%;
+
+  .user-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacing;
+
+    .user-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      object-fit: cover;
+    }
+
+    .user-info {
+      .user-name {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .user-username {
+        font-size: 14px;
+        color: $secondary-color;
+        margin: 0;
+      }
+    }
+  }
+  .photo-image {
+    width: 100%;
+    margin-bottom: $spacing;
+    max-height: 65%;
+  }
+
+  .photo-info-container {
+    display: flex;
+    gap: $spacing;
+    margin-top: 10px;
+
+    .info-views,
+    .info-downloads {
+      .statistics-title {
+        font-size: 14px;
+        color: $secondary-color;
+        margin: 0;
+        letter-spacing: 0.5px;
+      }
+
+      .statistics-number {
+        font-size: 15px;
+        font-weight: 600;
+        color: black;
+        margin: 5px 0 0;
+      }
+    }
+  }
+}
