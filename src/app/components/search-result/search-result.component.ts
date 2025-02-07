@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { SearcherHeaderComponent } from '../../shared/components/searcher-header/searcher-header.component';
-import { PhotosListComponent } from '../photos-list/photos-list.component';
+import { PhotosListComponent } from '../../shared/components/photos-list/photos-list.component';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MainService } from '../../services/main.service';

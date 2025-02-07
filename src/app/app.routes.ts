@@ -10,7 +10,7 @@ export const ROUTES: Route[] = [
 		loadComponent: () => import('./components/search-result/search-result.component').then((m) => m.SearchResultComponent),
 	},
 	{
-		path: 'photo:/photo_id',
+		path: 'photo/:photo_id',
 		loadComponent: () => import('./components/photo-detail/photo-detail.component').then((m) => m.PhotoDetailComponent)
 	}
 ]

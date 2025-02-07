@@ -1,1 +1,3 @@
-<img class="photo" [src]="photo.urls.small" alt="Photo" />
+<a [routerLink]="['/photo', photo.id]">
+  <img class="photo" [src]="photo.urls.small" alt="Photo" />
+</a>
