@@ -8,7 +8,9 @@
     </div>
   </div>
 
-  <img class="photo-image" [src]="photoInfo$$()?.urls?.regular" alt="image-detail" />
+  <div class="image-container">
+    <img class="photo-image" [src]="photoInfo$$()?.urls?.raw" alt="image-detail" />
+  </div>
 
   <div class="photo-info-container">
     <div class="info-views">

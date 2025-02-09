@@ -11,12 +11,14 @@ import { PhotoDetailComponent } from '../../../components/photo-detail/photo-det
 export class PhotoCardComponent {
   @Input({ required: true }) photo: any;
 
-  private matDialog = inject(MatDialog)
+  private matDialog = inject(MatDialog);
 
   protected openPhotoDetailDialog(photoId: string) {
     history.pushState(null, '', `/photo/${photoId}`);
 
     const dialog = this.matDialog.open(PhotoDetailComponent, {
+      width: '90%',
+      maxWidth: 'none',
       data: { id: photoId }
     });
 
