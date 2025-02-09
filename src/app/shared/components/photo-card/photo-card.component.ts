@@ -19,6 +19,7 @@ export class PhotoCardComponent {
     const dialog = this.matDialog.open(PhotoDetailComponent, {
       width: '90%',
       maxWidth: 'none',
+      maxHeight: '95%',
       data: { id: photoId }
     });
 

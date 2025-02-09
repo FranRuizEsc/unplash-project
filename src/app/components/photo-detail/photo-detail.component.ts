@@ -1,23 +1,27 @@
 import { Component, Inject, Optional, signal } from '@angular/core';
 import { MainService } from '../../services/main.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IPhoto } from '../../shared/models/photo-info.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { of, switchMap } from 'rxjs';
+import { MatChipsModule } from '@angular/material/chips';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-photo-detail',
-  imports: [],
+  imports: [MatChipsModule, CommonModule],
   templateUrl: './photo-detail.component.html',
   styleUrl: './photo-detail.component.scss',
 })
 export class PhotoDetailComponent {
   protected photoInfo$$ = signal<IPhoto | null>(null);
+  protected isDialog: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private mainService: MainService,
+    private router: Router,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: string },
     @Optional() public dialogRef: MatDialogRef<PhotoDetailComponent>
   ) {
@@ -32,6 +36,8 @@ export class PhotoDetailComponent {
         this.photoInfo$$.set(photo);
       }
     });
+
+    this.isDialog = !!this.dialogRef
   }
 
   protected close() {
@@ -47,6 +53,11 @@ export class PhotoDetailComponent {
     if (imageUrl) {
       window.open(imageUrl, '_blank');
     }
+  }
+
+  protected openCategory(category: string) {
+    this.dialogRef?.close();
+    this.router.navigate(['/search'], { queryParams: { searchTerm: category } });
   }
 }
 
