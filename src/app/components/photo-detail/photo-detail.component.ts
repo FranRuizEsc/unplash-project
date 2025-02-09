@@ -41,5 +41,12 @@ export class PhotoDetailComponent {
   protected formatNumber(number: number): string {
     return new Intl.NumberFormat('es-ES').format(number);
   }
+
+  protected openFullscreen() {
+    const imageUrl = this.photoInfo$$()?.urls?.raw;
+    if (imageUrl) {
+      window.open(imageUrl, '_blank');
+    }
+  }
 }
 

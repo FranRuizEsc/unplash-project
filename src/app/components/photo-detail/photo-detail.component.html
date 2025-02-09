@@ -9,7 +9,7 @@
   </div>
 
   <div class="image-container">
-    <img class="photo-image" [src]="photoInfo$$()?.urls?.raw" alt="image-detail" />
+    <img class="photo-image" [src]="photoInfo$$()?.urls?.raw" alt="image-detail" (click)="openFullscreen()" />
   </div>
 
   <div class="photo-info-container">
