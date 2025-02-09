@@ -1,0 +1,27 @@
+@if(photoInfo$$()) {
+<div class="photo-detail-container">
+  <div class="user-container">
+    <img class="user-image" [src]="photoInfo$$()?.user?.profile_image?.small" alt="profile-image" />
+    <div class="user-info">
+      <p class="user-name">{{ photoInfo$$()?.user?.name }}</p>
+      <p class="user-username">{{ photoInfo$$()?.user?.username }}</p>
+    </div>
+  </div>
+
+  <div class="image-container">
+    <img class="photo-image" [src]="photoInfo$$()?.urls?.raw" alt="image-detail" />
+  </div>
+
+  <div class="photo-info-container">
+    <div class="info-views">
+      <p class="statistics-title">Views</p>
+      <p class="statistics-number">{{ formatNumber(photoInfo$$()?.views ?? 0) }}</p>
+    </div>
+
+    <div class="info-downloads">
+      <p class="statistics-title">Downloads</p>
+      <p class="statistics-number">{{ formatNumber(photoInfo$$()?.downloads ?? 0) }}</p>
+    </div>
+  </div>
+</div>
+}

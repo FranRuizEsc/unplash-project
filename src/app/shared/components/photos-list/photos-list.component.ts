@@ -1,6 +1,6 @@
-import { MainService } from '../../services/main.service';
+import { MainService } from '../../../services/main.service';
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { PhotoCardComponent } from '../../shared/components/photo-card/photo-card.component';
+import { PhotoCardComponent } from '../photo-card/photo-card.component';
 import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { tap } from 'rxjs/internal/operators/tap';

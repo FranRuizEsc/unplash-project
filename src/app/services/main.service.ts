@@ -13,6 +13,10 @@ export class MainService {
     return this.http.get<any>(environment.apiUrl + '/photos', { params: { page, per_page: 15 } });
   }
 
+  getPhotoById(id: string) {
+    return this.http.get<any>(environment.apiUrl + '/photos/' + id)
+  }
+
   searchPhotos(query: string, page: number = 1) {
     return this.http.get<any>(environment.apiUrl + '/search/photos', { params: { page, per_page: 15, query } });
   }
