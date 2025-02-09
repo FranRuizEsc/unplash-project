@@ -1,5 +1,5 @@
 @if(photoInfo$$()) {
-<div class="photo-detail-container">
+<div class="photo-detail-container" [ngStyle]="isDialog ? { 'overflow-y': 'auto' } : { 'overflow-y': '' }">
   <div class="user-container">
     <img class="user-image" [src]="photoInfo$$()?.user?.profile_image?.small" alt="profile-image" />
     <div class="user-info">
@@ -24,9 +24,9 @@
     </div>
   </div>
 
-  <mat-chip-set class="category-chip">
+  <mat-chip-set class="category-chips">
     @for (photoTag of photoInfo$$()?.tags; track photoTag.title) {
-    <mat-chip class="example-box" (click)="openCategory(photoTag.title)">{{ photoTag.title }}</mat-chip>
+    <mat-chip class="chip" (click)="openCategory(photoTag.title)">{{ photoTag.title }}</mat-chip>
     }
   </mat-chip-set>
 </div>

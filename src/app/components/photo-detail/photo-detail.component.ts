@@ -6,15 +6,17 @@ import { IPhoto } from '../../shared/models/photo-info.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { of, switchMap } from 'rxjs';
 import { MatChipsModule } from '@angular/material/chips';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-photo-detail',
-  imports: [MatChipsModule],
+  imports: [MatChipsModule, CommonModule],
   templateUrl: './photo-detail.component.html',
   styleUrl: './photo-detail.component.scss',
 })
 export class PhotoDetailComponent {
   protected photoInfo$$ = signal<IPhoto | null>(null);
+  protected isDialog: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,10 +34,10 @@ export class PhotoDetailComponent {
     ).subscribe((photo: IPhoto) => {
       if (photo) {
         this.photoInfo$$.set(photo);
-
-        console.log('photo', photo)
       }
     });
+
+    this.isDialog = !!this.dialogRef
   }
 
   protected close() {
