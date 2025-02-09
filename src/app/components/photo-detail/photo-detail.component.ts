@@ -1,10 +1,10 @@
-import { Component, Inject, OnDestroy, Optional } from '@angular/core';
+import { Component, Inject, Optional, signal } from '@angular/core';
 import { MainService } from '../../services/main.service';
 import { ActivatedRoute } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IPhoto } from '../../shared/models/photo-info.interface';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { IUser } from '../../shared/models/user.interfafce';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-photo-detail',
@@ -12,12 +12,8 @@ import { IUser } from '../../shared/models/user.interfafce';
   templateUrl: './photo-detail.component.html',
   styleUrl: './photo-detail.component.scss'
 })
-export class PhotoDetailComponent implements OnDestroy {
-
-  protected photoInfo: IPhoto;
-  protected userInfo: IUser;
-
-  private photoId: string
+export class PhotoDetailComponent {
+  protected photoInfo$$ = signal<IPhoto | null>(null);
 
   constructor(
     private route: ActivatedRoute,
@@ -25,23 +21,15 @@ export class PhotoDetailComponent implements OnDestroy {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: string },
     @Optional() public dialogRef: MatDialogRef<PhotoDetailComponent>
   ) {
-    this.photoId = data?.id
+    this.route.params.pipe(takeUntilDestroyed()).subscribe((params) => {
+
+      const photoId = this.data?.id || params['photo_id'];
+      if (photoId) {
+        this.getPhotoDetails(photoId)
+      }
+    });
   }
 
-  ngOnInit() {
-    if (!this.photoId) {
-      this.route.params.subscribe(params => {
-        this.photoId = params['photo_id'];
-        this.getPhotoDetails(this.photoId);
-      });
-    } else {
-      this.getPhotoDetails(this.photoId);
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.route.queryParams.subscribe().unsubscribe();
-  }
 
   protected close() {
     this.dialogRef.close()
@@ -52,14 +40,12 @@ export class PhotoDetailComponent implements OnDestroy {
   }
 
 
-  private getPhotoDetails(id: string) {
-    this.mainService.getPhotoById(id).subscribe((res: IPhoto) => {
-
-      console.log('res', res)
-      this.photoInfo = res;
-      this.userInfo = res.user;
-
-      console.log('photoInfo', this.photoInfo)
-    })
+  private getPhotoDetails(photoId: string) {
+    this.mainService.getPhotoById(photoId)
+      .subscribe((photo: IPhoto) => {
+        this.photoInfo$$.set(photo);
+        console.log('entra', this.photoInfo$$())
+      });
   }
 }
+
