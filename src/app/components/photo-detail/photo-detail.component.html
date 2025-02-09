@@ -26,7 +26,7 @@
 
   <mat-chip-set class="category-chip">
     @for (photoTag of photoInfo$$()?.tags; track photoTag.title) {
-    <mat-chip class="example-box">{{ photoTag.title }}</mat-chip>
+    <mat-chip class="example-box" (click)="openCategory(photoTag.title)">{{ photoTag.title }}</mat-chip>
     }
   </mat-chip-set>
 </div>
