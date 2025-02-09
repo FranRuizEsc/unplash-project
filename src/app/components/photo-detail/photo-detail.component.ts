@@ -5,10 +5,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IPhoto } from '../../shared/models/photo-info.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { of, switchMap } from 'rxjs';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-photo-detail',
-  imports: [],
+  imports: [MatChipsModule],
   templateUrl: './photo-detail.component.html',
   styleUrl: './photo-detail.component.scss',
 })
@@ -30,6 +31,8 @@ export class PhotoDetailComponent {
     ).subscribe((photo: IPhoto) => {
       if (photo) {
         this.photoInfo$$.set(photo);
+
+        console.log('photo', photo)
       }
     });
   }

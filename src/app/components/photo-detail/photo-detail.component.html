@@ -23,5 +23,11 @@
       <p class="statistics-number">{{ formatNumber(photoInfo$$()?.downloads ?? 0) }}</p>
     </div>
   </div>
+
+  <mat-chip-set class="category-chip">
+    @for (photoTag of photoInfo$$()?.tags; track photoTag.title) {
+    <mat-chip class="example-box">{{ photoTag.title }}</mat-chip>
+    }
+  </mat-chip-set>
 </div>
 }
