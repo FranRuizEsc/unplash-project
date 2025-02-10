@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { PhotosListComponent } from '../../../shared/components/photos-list/photos-list.component';
 import { SearcherHeaderComponent } from '../../../shared/components/searcher-header/searcher-header.component';
+import { PhotosListComponent } from '../../photos/photos-list/photos-list.component';
 
 @Component({
   selector: 'main',
