@@ -1,12 +1,12 @@
 import { Component, Inject, Optional, signal } from '@angular/core';
-import { MainService } from '../../services/main.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IPhoto } from '../../shared/models/photo-info.interface';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { of, switchMap } from 'rxjs';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
+import { MainService } from '../../../services/main.service';
+import { IPhoto } from '../../../shared/models/photo-info.interface';
 
 @Component({
   selector: 'app-photo-detail',

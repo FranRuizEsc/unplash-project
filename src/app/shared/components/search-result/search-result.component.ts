@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { SearcherHeaderComponent } from '../../shared/components/searcher-header/searcher-header.component';
-import { PhotosListComponent } from '../../shared/components/photos-list/photos-list.component';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { MainService } from '../../services/main.service';
+import { PhotosListComponent } from '../../../components/photos/photos-list/photos-list.component';
+import { MainService } from '../../../services/main.service';
+import { SearcherHeaderComponent } from '../searcher-header/searcher-header.component';
 
 @Component({
   selector: 'app-search-result',
