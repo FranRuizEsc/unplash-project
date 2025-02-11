@@ -1,4 +1,4 @@
-import { PhotoService } from '../../../services/photo.service';
+import { PhotoService } from '../../../core/services/photo.service';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { PhotoCardComponent } from '../photo-card/photo-card.component';
 import { CommonModule } from '@angular/common';

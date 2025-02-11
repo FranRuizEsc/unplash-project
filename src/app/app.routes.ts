@@ -7,7 +7,7 @@ export const ROUTES: Routes = [
 	},
 	{
 		path: 'search',
-		loadComponent: () => import('./../app/shared/components/search-result/search-result.component').then((m) => m.SearchResultComponent),
+		loadComponent: () => import('./shared/components/search-result/search-result.component').then((m) => m.SearchResultComponent),
 	},
 	{
 		path: 'photo',

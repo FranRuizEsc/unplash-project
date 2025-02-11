@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SearcherHeaderComponent } from '../../../shared/components/searcher-header/searcher-header.component';
+import { ToolbarComponent } from '../../../shared/components/toolbar/toolbar.component';
 import { PhotosListComponent } from '../../photos/photos-list/photos-list.component';
 
 @Component({
   selector: 'main',
-  imports: [PhotosListComponent, SearcherHeaderComponent],
+  imports: [PhotosListComponent, ToolbarComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })

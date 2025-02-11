@@ -9,12 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'searcher-header',
+  selector: 'app-toolbar',
   imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, CommonModule],
-  templateUrl: './searcher-header.component.html',
-  styleUrl: './searcher-header.component.scss'
+  templateUrl: './toolbar.component.html',
+  styleUrl: './toolbar.component.scss'
 })
-export class SearcherHeaderComponent {
+export class ToolbarComponent {
 
   private router = inject(Router);
   private route = inject(ActivatedRoute);

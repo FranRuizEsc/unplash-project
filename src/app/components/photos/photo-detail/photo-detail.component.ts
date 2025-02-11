@@ -5,8 +5,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { of, switchMap } from 'rxjs';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
-import { IPhoto } from '../../../shared/models/photo-info.interface';
-import { PhotoService } from '../../../services/photo.service';
+import { IPhoto } from '../../../core/models/photo-info.interface';
+import { PhotoService } from '../../../core/services/photo.service';
 
 @Component({
   selector: 'app-photo-detail',
