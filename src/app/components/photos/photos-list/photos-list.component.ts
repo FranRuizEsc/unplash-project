@@ -1,4 +1,4 @@
-import { MainService } from '../../../services/main.service';
+import { PhotoService } from '../../../services/photo.service';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { PhotoCardComponent } from '../photo-card/photo-card.component';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class PhotosListComponent implements OnInit {
   @Input() searchTerm: string;
 
-  private mainService = inject(MainService);
+  private photoService = inject(PhotoService);
   private page = 1
 
   protected isLoading = false;
@@ -60,7 +60,7 @@ export class PhotosListComponent implements OnInit {
   }
 
   private getAllPhotos(page: number) {
-    this.mainService.getAllPhtos(page).pipe(
+    this.photoService.getAllPhtos(page).pipe(
       tap((data) => {
         this.updatePhotosList(data);
         this.isLoading = false;
@@ -69,7 +69,7 @@ export class PhotosListComponent implements OnInit {
   }
 
   private searchPhotos(searchTerm: string, page: number) {
-    this.mainService.searchPhotos(searchTerm, page).pipe(
+    this.photoService.searchPhotos(searchTerm, page).pipe(
       tap((data) => {
         this.updatePhotosList(data.results);
         this.isLoading = false;

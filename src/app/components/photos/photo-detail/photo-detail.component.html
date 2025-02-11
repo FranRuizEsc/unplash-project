@@ -1,5 +1,9 @@
 @if(photoInfo$$()) {
-<div class="photo-detail-container" [ngStyle]="isDialog ? { 'overflow-y': 'auto' } : { 'overflow-y': '' }">
+<div
+  class="photo-detail-container"
+  [ngStyle]="isDialog ? { 'overflow-y': 'auto' } : { 'overflow-y': '' }"
+  (click)="openUserDetail()"
+>
   <div class="user-container">
     <img class="user-image" [src]="photoInfo$$()?.user?.profile_image?.small" alt="profile-image" />
     <div class="user-info">

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PhotosListComponent } from '../../../components/photos/photos-list/photos-list.component';
-import { MainService } from '../../../services/main.service';
+import { PhotoService } from '../../../services/photo.service';
 import { SearcherHeaderComponent } from '../searcher-header/searcher-header.component';
 
 @Component({
@@ -13,7 +13,7 @@ import { SearcherHeaderComponent } from '../searcher-header/searcher-header.comp
 })
 export class SearchResultComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private mainService = inject(MainService);
+  private photoService = inject(PhotoService);
   private subscription = new Subscription();
 
   protected searchTerm: string = '';

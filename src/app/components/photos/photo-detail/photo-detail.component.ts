@@ -5,8 +5,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { of, switchMap } from 'rxjs';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
-import { MainService } from '../../../services/main.service';
 import { IPhoto } from '../../../shared/models/photo-info.interface';
+import { PhotoService } from '../../../services/photo.service';
 
 @Component({
   selector: 'app-photo-detail',
@@ -20,7 +20,7 @@ export class PhotoDetailComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private mainService: MainService,
+    private photoService: PhotoService,
     private router: Router,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: { id: string },
     @Optional() public dialogRef: MatDialogRef<PhotoDetailComponent>
@@ -29,7 +29,7 @@ export class PhotoDetailComponent {
       takeUntilDestroyed(),
       switchMap((params) => {
         const photoId = this.data?.id || params['photo_id'];
-        return photoId ? this.mainService.getPhotoById(photoId) : of(null);
+        return photoId ? this.photoService.getPhotoById(photoId) : of(null);
       })
     ).subscribe((photo: IPhoto) => {
       if (photo) {
@@ -58,6 +58,10 @@ export class PhotoDetailComponent {
   protected openCategory(category: string) {
     this.dialogRef?.close();
     this.router.navigate(['/search'], { queryParams: { searchTerm: category } });
+  }
+
+  protected openUserDetail() {
+    this.router.navigate(['/user', this.photoInfo$$()?.user?.username]);
   }
 }
 
