@@ -40,10 +40,6 @@ export class PhotoDetailComponent {
     this.isDialog = !!this.dialogRef
   }
 
-  protected close() {
-    this.dialogRef.close()
-  }
-
   protected formatNumber(number: number): string {
     return new Intl.NumberFormat('es-ES').format(number);
   }
@@ -61,7 +57,9 @@ export class PhotoDetailComponent {
   }
 
   protected openUserDetail() {
-    this.router.navigate(['/user', this.photoInfo$$()?.user?.username]);
+    const username = this.photoInfo$$()?.user?.username;
+    this.dialogRef?.close();
+    this.router.navigate(['/user', username]);
   }
 }
 

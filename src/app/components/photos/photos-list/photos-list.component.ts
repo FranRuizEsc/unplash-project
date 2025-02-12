@@ -1,10 +1,12 @@
 import { PhotoService } from '../../../core/services/photo.service';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { PhotoCardComponent } from '../photo-card/photo-card.component';
 import { CommonModule } from '@angular/common';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { tap } from 'rxjs/internal/operators/tap';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { UserService } from '../../../core/services/user.service';
+import { IPhoto } from '../../../core/models/photo-info.interface';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'photos-list',
@@ -13,9 +15,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   styleUrl: './photos-list.component.scss'
 })
 export class PhotosListComponent implements OnInit {
-  @Input() searchTerm: string;
+  searchTerm = input<string>()
+  userName = input<string>()
 
   private photoService = inject(PhotoService);
+  private userService = inject(UserService);
   private page = 1
 
   protected isLoading = false;
@@ -23,57 +27,43 @@ export class PhotosListComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loadInitialPhotos();
+    this.loadPhotos();
   }
 
   onScroll(event: any) {
     const { scrollTop, scrollHeight, clientHeight } = event.target;
     if (scrollTop + clientHeight >= scrollHeight - 100) {
-      this.loadMorePhotos();
+      this.page++
+      this.loadPhotos();
     }
   }
 
-  protected loadMorePhotos() {
-    this.page++;
-    if (this.searchTerm) {
-      this.searchPhotos(this.searchTerm, this.page);
-    } else {
-      this.getAllPhotos(this.page);
+  private loadPhotos() {
+    if (!this.isLoading) {
+      this.isLoading = true;
+      this.getPhotosBasedOnContext().subscribe((photos => {
+        this.updatePhotosList(photos);
+        this.isLoading = false;
+      }));
     }
   }
 
-  private loadInitialPhotos() {
-    this.isLoading = true;
-    if (this.searchTerm) {
-      this.searchPhotos(this.searchTerm, this.page);
-    } else {
-      this.getAllPhotos(this.page);
+  private getPhotosBasedOnContext() {
+    const searchTerm = this.searchTerm();
+    const userName = this.userName();
+
+    if (searchTerm) {
+      return this.photoService.searchPhotos(searchTerm, this.page).pipe(map((response) => response.results));
     }
+    if (userName) {
+      return this.userService.getUserPhotos(userName, this.page);
+    }
+    return this.photoService.getAllPhtos(this.page);
   }
 
-  private updatePhotosList(newPhotos: any[]) {
-    const existingIds = new Set(this.listPhotos.map((photo) => photo.id));
-    const filteredPhotos = newPhotos.filter((photo) => !existingIds.has(photo.id));
-
+  private updatePhotosList(newPhotos: IPhoto[]) {
+    const existingIds = new Set(this.listPhotos.map(photo => photo.id));
+    const filteredPhotos = newPhotos.filter(photo => !existingIds.has(photo.id));
     this.listPhotos = [...this.listPhotos, ...filteredPhotos];
-    this.isLoading = false;
-  }
-
-  private getAllPhotos(page: number) {
-    this.photoService.getAllPhtos(page).pipe(
-      tap((data) => {
-        this.updatePhotosList(data);
-        this.isLoading = false;
-      })
-    ).subscribe();
-  }
-
-  private searchPhotos(searchTerm: string, page: number) {
-    this.photoService.searchPhotos(searchTerm, page).pipe(
-      tap((data) => {
-        this.updatePhotosList(data.results);
-        this.isLoading = false;
-      })
-    ).subscribe();
   }
 }

@@ -1,0 +1,98 @@
+:host {
+  .user-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+    .image-container {
+      .image {
+        border-radius: 50%;
+      }
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 24px;
+
+      .user-name {
+        font-size: 40px;
+        font-weight: 600;
+        letter-spacing: 2.5px;
+      }
+
+      .user-bio {
+        font-size: 16px;
+        font-weight: 400;
+        max-width: 700px;
+        margin: 16px 0;
+      }
+    }
+
+    .location-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-stats-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .user-stats {
+      display: flex;
+      gap: 16px;
+
+      .followers-container,
+      .following-container {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .stat-count,
+      .stat-text {
+        display: block;
+      }
+    }
+
+    .social-media-container {
+      display: flex;
+      gap: 10px;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .social-media-portfolio {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .social-media-instagram {
+        .instagram-link-container {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .instagram-icon {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  .photos-list {
+    margin-top: 20px;
+    height: calc(100% - 410px);
+  }
+}

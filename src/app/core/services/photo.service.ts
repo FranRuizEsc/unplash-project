@@ -9,7 +9,7 @@ export class PhotoService {
 
   private http = inject(HttpClient);
 
-  getAllPhtos(page: number = 1) {
+  getAllPhtos(page = 1) {
     return this.http.get<any>(environment.apiUrl + '/photos', { params: { page, per_page: 15 } });
   }
 
@@ -17,7 +17,7 @@ export class PhotoService {
     return this.http.get<any>(environment.apiUrl + '/photos/' + id)
   }
 
-  searchPhotos(query: string, page: number = 1) {
+  searchPhotos(query: string, page = 1) {
     return this.http.get<any>(environment.apiUrl + '/search/photos', { params: { page, per_page: 15, query } });
   }
 }

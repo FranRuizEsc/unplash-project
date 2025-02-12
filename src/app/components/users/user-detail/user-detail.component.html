@@ -1,1 +1,38 @@
-<p>user-detail works!</p>
+@if(userInfo$$()) {
+<app-toolbar></app-toolbar>
+<div class="user-container">
+  <div class="image-container">
+    <img class="image" [src]="userInfo$$()?.profile_image?.large" alt="image-detail" />
+  </div>
+
+  <div class="user-info-container">
+    <div class="user-info">
+      <span class="user-name">{{ userInfo$$()!.name }}</span>
+      <span class="user-bio">{{ userInfo$$()!.bio }}</span>
+      <div class="location-container">
+        <mat-icon class="material-icons-outlined">location_on</mat-icon>
+        <span class="user-location">{{ userInfo$$()!.location }}</span>
+      </div>
+      <div class="user-stats-container">
+        <div class="social-media-container">
+          @if(userInfo$$()?.social?.portfolio_url) {
+          <div class="social-media-portfolio">
+            <mat-icon>public</mat-icon>
+            <a [href]="userInfo$$()!.social!.portfolio_url" target="_blank">Portfolio </a>
+          </div>
+          } @if(userInfo$$()!.social!.instagram_url) {
+          <div class="social-media-instagram">
+            <a class="instagram-link-container" [href]="userInfo$$()!.social!.instagram_url" target="_blank">
+              <img class="instagram-icon" src="assets/icons/instagram.png" alt="Instagram" />
+              <span class="instagram-username">{{ userInfo$$()!.social!.instagram_username }}</span>
+            </a>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<photos-list class="photos-list" [userName]="userInfo$$()!.username"></photos-list>
+}

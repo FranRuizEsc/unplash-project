@@ -1,19 +1,20 @@
 @if(photoInfo$$()) {
-<div
-  class="photo-detail-container"
-  [ngStyle]="isDialog ? { 'overflow-y': 'auto' } : { 'overflow-y': '' }"
-  (click)="openUserDetail()"
->
+<div class="photo-detail-container" [ngStyle]="isDialog ? { 'overflow-y': 'auto' } : { 'overflow-y': '' }">
   <div class="user-container">
-    <img class="user-image" [src]="photoInfo$$()?.user?.profile_image?.small" alt="profile-image" />
-    <div class="user-info">
+    <img
+      class="user-image"
+      [src]="photoInfo$$()?.user?.profile_image?.small"
+      alt="profile-image"
+      (click)="openUserDetail()"
+    />
+    <div class="user-info" (click)="openUserDetail()">
       <p class="user-name">{{ photoInfo$$()?.user?.name }}</p>
       <p class="user-username">{{ photoInfo$$()?.user?.username }}</p>
     </div>
   </div>
 
   <div class="image-container">
-    <img class="photo-image" [src]="photoInfo$$()?.urls?.raw" alt="image-detail" (click)="openFullscreen()" />
+    <img class="image" [src]="photoInfo$$()?.urls?.raw" alt="image-detail" (click)="openFullscreen()" />
   </div>
 
   <div class="photo-info-container">

@@ -24,7 +24,9 @@ export class PhotoCardComponent {
     });
 
     dialog.afterClosed().subscribe(() => {
-      history.pushState(null, '', '/');
+      if (location.pathname.includes('/photo/')) {
+        history.pushState(null, '', '/');
+      }
     });
   }
 }

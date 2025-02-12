@@ -2,7 +2,14 @@ export interface IUser {
 	id: string;
 	username: string;
 	name: string;
-	portfolio_url: string;
+	last_name: string;
+	social: {
+		instagram_username?: string;
+		twitter_username?: string;
+		portfolio_url?: string;
+		twitter_url?: string;
+		instagram_url?: string;
+	}
 	bio: string;
 	location: string;
 	total_likes: number;
