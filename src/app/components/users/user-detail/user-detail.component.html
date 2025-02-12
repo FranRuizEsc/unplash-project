@@ -20,11 +20,11 @@
             <mat-icon>public</mat-icon>
             <a [href]="userInfo$$()!.social!.portfolio_url" target="_blank">Portfolio </a>
           </div>
-          } @if(userInfo$$()!.social!.instagram_url) {
+          } @if(userInfo$$()!.social!.instagram_username) {
           <div class="social-media-instagram">
             <a
               class="instagram-link-container"
-              [href]="userInfo$$()!.social!.instagram_url"
+              href="https://www.instagram.com/{{ userInfo$$()!.social!.instagram_username }}/"
               target="_blank"
             >
               <img class="instagram-icon" src="assets/icons/instagram.png" alt="Instagram" />
