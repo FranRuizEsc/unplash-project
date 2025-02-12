@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { ToolbarComponent } from '../../../shared/components/toolbar/toolbar.component';
 import { switchMap } from 'rxjs';
@@ -20,6 +20,7 @@ export class UserDetailComponent {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
+    private router: Router
   ) {
     this.route.params.pipe(takeUntilDestroyed(),
       switchMap((params) => this.userService.getUserByName(params['username'])))
@@ -34,6 +35,12 @@ export class UserDetailComponent {
     if (url) {
       window.open(url, '_blank');
       (event.target as HTMLSelectElement).selectedIndex = 0;
+    }
+  }
+
+  protected goTolocationSearch(location: string) {
+    if (location) {
+      this.router.navigate(['/search'], { queryParams: { searchTerm: location } });
     }
   }
 }

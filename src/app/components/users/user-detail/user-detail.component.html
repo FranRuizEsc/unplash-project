@@ -9,7 +9,7 @@
     <div class="user-info">
       <span class="user-name">{{ userInfo$$()!.name }}</span>
       <span class="user-bio">{{ userInfo$$()!.bio }}</span>
-      <div class="location-container">
+      <div class="location-container" (click)="goTolocationSearch(userInfo$$()!.location)">
         <mat-icon class="material-icons-outlined">location_on</mat-icon>
         <span class="user-location">{{ userInfo$$()!.location }}</span>
       </div>
@@ -22,7 +22,11 @@
           </div>
           } @if(userInfo$$()!.social!.instagram_url) {
           <div class="social-media-instagram">
-            <a class="instagram-link-container" [href]="userInfo$$()!.social!.instagram_url" target="_blank">
+            <a
+              class="instagram-link-container"
+              [href]="userInfo$$()!.social!.instagram_url"
+              target="_blank"
+            >
               <img class="instagram-icon" src="assets/icons/instagram.png" alt="Instagram" />
               <span class="instagram-username">{{ userInfo$$()!.social!.instagram_username }}</span>
             </a>
