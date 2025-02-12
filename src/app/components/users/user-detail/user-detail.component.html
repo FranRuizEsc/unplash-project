@@ -1,51 +1,82 @@
 @if(userInfo$$()) {
 <app-toolbar></app-toolbar>
 <div class="user-container">
-  <div class="image-container">
-    <img class="image" [src]="userInfo$$()!.profile_image!.large" alt="image-detail" />
-  </div>
+  <div class="user-wrapper">
+    <div class="image-container">
+      <img class="image" [src]="userInfo$$()!.profile_image!.large" alt="image-detail" />
+    </div>
 
-  <div class="user-info-container">
-    <div class="user-info">
-      <span class="user-name">{{ userInfo$$()!.name }}</span>
-      <span class="user-bio">{{ userInfo$$()!.bio }}</span>
-      <div class="location-container" (click)="goTolocationSearch(userInfo$$()!.location)">
-        <mat-icon class="material-icons-outlined">location_on</mat-icon>
-        <span class="user-location">{{ userInfo$$()!.location }}</span>
-      </div>
-      <div class="user-stats-container">
-        <div class="social-media-container">
-          @if(userInfo$$()!.social!.portfolio_url) {
-          <div class="social-media-portfolio">
-            <mat-icon>public</mat-icon>
-            <a [href]="userInfo$$()!.social!.portfolio_url" target="_blank">Portfolio </a>
-          </div>
-          } @if(userInfo$$()!.social!.instagram_username) {
-          <div class="social-media-instagram">
-            <a
-              class="instagram-link-container"
-              href="https://www.instagram.com/{{ userInfo$$()!.social!.instagram_username }}/"
-              target="_blank"
-            >
-              <img class="instagram-icon" src="assets/icons/instagram.png" alt="Instagram" />
-              <span class="instagram-username">{{ userInfo$$()!.social!.instagram_username }}</span>
-            </a>
-          </div>
-          }
+    <div class="user-info-container">
+      <div class="user-info">
+        <span class="user-name">{{ userInfo$$()!.name }}</span>
+        <span class="user-bio">{{ userInfo$$()!.bio }}</span>
+        <div class="location-container" (click)="goTolocationSearch(userInfo$$()!.location)">
+          <mat-icon class="material-icons-outlined">location_on</mat-icon>
+          <span class="user-location">{{ userInfo$$()!.location }}</span>
         </div>
-      </div>
-      <div class="user-interests">
-        <span class="interests-title">Interests</span>
-        <mat-chip-set class="category-chips">
-          @for (userTag of userInfo$$()!.tags.custom; track userTag.title) {
-          <mat-chip class="chip" (click)="openCategory(userTag.title)">{{
-            userTag.title
-          }}</mat-chip>
-          }
-        </mat-chip-set>
+        <div class="user-stats-container">
+          <div class="social-media-container">
+            @if(userInfo$$()!.social!.portfolio_url) {
+            <div class="social-media-portfolio">
+              <mat-icon>public</mat-icon>
+              <a [href]="userInfo$$()!.social!.portfolio_url" target="_blank">Portfolio </a>
+            </div>
+            } @if(userInfo$$()!.social!.instagram_username) {
+            <div class="social-media-instagram">
+              <a
+                class="instagram-link-container"
+                href="https://www.instagram.com/{{ userInfo$$()!.social!.instagram_username }}/"
+                target="_blank"
+              >
+                <img class="instagram-icon" src="assets/icons/instagram.png" alt="Instagram" />
+                <span class="instagram-username">{{
+                  userInfo$$()!.social!.instagram_username
+                }}</span>
+              </a>
+            </div>
+            }
+          </div>
+        </div>
+        <div class="user-interests">
+          <span class="interests-title">Interests</span>
+          <mat-chip-set class="category-chips">
+            @for (userTag of userInfo$$()!.tags.custom; track userTag.title) {
+            <mat-chip class="chip" (click)="openCategory(userTag.title)">{{
+              userTag.title
+            }}</mat-chip>
+            }
+          </mat-chip-set>
+        </div>
       </div>
     </div>
   </div>
+  <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="navigation-tabs">
+    <a
+      mat-tab-link
+      [routerLink]="['photos']"
+      (click)="setActiveLink('photos')"
+      [active]="activeLink() === 'photos'"
+    >
+      Photos ({{ userInfo$$()!.total_photos }})
+    </a>
+    <a
+      mat-tab-link
+      [routerLink]="['likes']"
+      (click)="setActiveLink('likes')"
+      [active]="activeLink() === 'likes'"
+    >
+      Likes ({{ userInfo$$()!.total_likes }})
+    </a>
+    <a
+      mat-tab-link
+      [routerLink]="['collections']"
+      (click)="setActiveLink('collections')"
+      [active]="activeLink() === 'collections'"
+    >
+      Collections ({{ userInfo$$()!.total_collections }})
+    </a>
+  </nav>
+  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 </div>
 
 <photos-list class="photos-list" [userName]="userInfo$$()!.username"></photos-list>

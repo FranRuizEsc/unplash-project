@@ -8,15 +8,25 @@ import { IUser } from '../../../core/models/user.interfafce';
 import { MatIconModule } from '@angular/material/icon';
 import { PhotosListComponent } from '../../photos/photos-list/photos-list.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTabsModule } from '@angular/material/tabs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-detail',
-  imports: [ToolbarComponent, PhotosListComponent, MatIconModule, MatChipsModule],
+  imports: [
+    ToolbarComponent,
+    PhotosListComponent,
+    MatIconModule,
+    MatChipsModule,
+    MatTabsModule,
+    RouterLink,
+  ],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent {
   protected userInfo$$ = signal<IUser | null>(null);
+  protected activeLink = signal<string>('photos');
 
   constructor(
     private userService: UserService,
@@ -29,6 +39,8 @@ export class UserDetailComponent {
         console.log(user);
         this.userInfo$$.set(user);
       });
+
+    this.activeLink.set(this.route.snapshot.firstChild?.routeConfig?.path || 'photos');
   }
 
   protected goToSocialMedia(event: Event) {
@@ -49,4 +61,7 @@ export class UserDetailComponent {
     this.router.navigate(['/search'], { queryParams: { searchTerm: category } });
   }
 
+  protected setActiveLink(link: string) {
+    this.activeLink.set(link);
+  }
 }
