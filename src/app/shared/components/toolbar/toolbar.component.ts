@@ -38,7 +38,7 @@ export class ToolbarComponent {
     this.router.navigate(['/search'], { queryParams: { searchTerm: this.searchTerm } });
   }
 
-  protected clearSearchTerm() {
+  protected navigateTohome() {
     this.searchTerm = '';
     this.router.navigate(['/']);
   }

@@ -1,5 +1,10 @@
 <div class="searcher-container">
-  <img class="logo" src="assets/images/fondoBlanco.png" alt="logo-image" />
+  <img
+    class="logo"
+    src="assets/images/fondoBlanco.png"
+    alt="logo-image"
+    (click)="navigateTohome()"
+  />
   <form (ngSubmit)="search()" class="search-form">
     <div class="search-container">
       <button mat-icon-button type="button" class="search-button" (click)="search()">
@@ -14,7 +19,7 @@
         (keyup.enter)="search()"
       />
       @if(searchTerm) {
-      <button mat-icon-button type="button" class="close-button" (click)="clearSearchTerm()">
+      <button mat-icon-button type="button" class="close-button" (click)="navigateTohome()">
         <mat-icon>close</mat-icon>
       </button>
       }

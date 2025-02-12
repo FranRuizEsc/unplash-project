@@ -1,5 +1,10 @@
-@if(photoInfo$$()) {
-<div class="photo-detail-container" [ngStyle]="isDialog ? { 'overflow-y': 'auto' } : { 'overflow-y': '' }">
+@if(photoInfo$$()) { @if(!isDialog) {
+<app-toolbar></app-toolbar>
+}
+<div
+  class="photo-detail-container"
+  [ngStyle]="isDialog ? { 'overflow-y': 'auto' } : { 'overflow-y': '' }"
+>
   <div class="user-container">
     <img
       class="user-image"
@@ -14,7 +19,12 @@
   </div>
 
   <div class="image-container">
-    <img class="image" [src]="photoInfo$$()?.urls?.raw" alt="image-detail" (click)="openFullscreen()" />
+    <img
+      class="image"
+      [src]="photoInfo$$()?.urls?.raw"
+      alt="image-detail"
+      (click)="openFullscreen()"
+    />
   </div>
 
   <div class="photo-info-container">

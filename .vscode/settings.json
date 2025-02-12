@@ -17,6 +17,8 @@
     "tab.activeBorder": "#16c916"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.htmlWhitespaceSensitivity": "css",
+  "prettier.bracketSameLine": false,
   "[typescript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
