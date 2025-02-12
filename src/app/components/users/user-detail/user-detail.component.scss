@@ -40,29 +40,6 @@
       cursor: pointer;
     }
 
-    .user-stats-container {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .user-stats {
-      display: flex;
-      gap: 16px;
-
-      .followers-container,
-      .following-container {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .stat-count,
-      .stat-text {
-        display: block;
-      }
-    }
-
     .social-media-container {
       display: flex;
       gap: 10px;
@@ -91,10 +68,16 @@
         }
       }
     }
+
+    .user-interests {
+      .category-chips {
+        margin-top: 8px;
+      }
+    }
   }
 
   .photos-list {
     margin-top: 20px;
-    height: calc(100% - 410px);
+    height: calc(100% - 490px);
   }
 }

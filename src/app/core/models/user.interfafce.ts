@@ -31,4 +31,10 @@ export interface IUser {
 		likes: string;
 		portfolio: string;
 	};
+	tags: {
+		custom: [{
+			type: string;
+			title: string
+		}];
+	};
 }
