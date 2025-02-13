@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { ToolbarComponent } from '../../../shared/components/toolbar/toolbar.component';
 import { switchMap } from 'rxjs';
@@ -10,6 +10,7 @@ import { PhotosListComponent } from '../../photos/photos-list/photos-list.compon
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterLink } from '@angular/router';
+import { UserCollectionsComponent } from '../user-collections/user-collections.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -20,7 +21,7 @@ import { RouterLink } from '@angular/router';
     MatChipsModule,
     MatTabsModule,
     RouterLink,
-    RouterOutlet
+    UserCollectionsComponent
   ],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',

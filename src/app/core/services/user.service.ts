@@ -17,4 +17,12 @@ export class UserService {
   getUserPhotos(username: string, page = 1) {
     return this.http.get<IPhoto[]>(environment.apiUrl + '/users/' + username + '/photos', { params: { page, per_page: 15 } })
   }
+
+  getUserPhotosLiked(username: string, page = 1) {
+    return this.http.get<IPhoto[]>(environment.apiUrl + '/users/' + username + '/likes', { params: { page, per_page: 15 } })
+  }
+
+  getUserCollections(username: string, page = 1) {
+    return this.http.get<IPhoto[]>(environment.apiUrl + '/users/' + username + '/collections', { params: { page, per_page: 15 } })
+  }
 }

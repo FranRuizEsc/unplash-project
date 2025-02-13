@@ -17,6 +17,7 @@ import { map } from 'rxjs';
 export class PhotosListComponent implements OnInit {
   searchTerm = input<string>()
   userName = input<string>()
+  isUserLiked = input<boolean>()
 
   private photoService = inject(PhotoService);
   private userService = inject(UserService);
@@ -51,14 +52,18 @@ export class PhotosListComponent implements OnInit {
   private getPhotosBasedOnContext() {
     const searchTerm = this.searchTerm();
     const userName = this.userName();
+    const isUserLiked = this.isUserLiked();
 
     if (searchTerm) {
       return this.photoService.searchPhotos(searchTerm, this.page).pipe(map((response) => response.results));
     }
+    if (isUserLiked && userName) {
+      return this.userService.getUserPhotosLiked(userName, this.page);
+    }
     if (userName) {
       return this.userService.getUserPhotos(userName, this.page);
     }
-    return this.photoService.getAllPhtos(this.page);
+    return this.photoService.getAllPhotos(this.page);
   }
 
   private updatePhotosList(newPhotos: IPhoto[]) {

@@ -80,8 +80,10 @@
     <div class="tab-content">
       @if (activeLink() === 'photos') {
       <photos-list [userName]="userInfo$$()!.username"></photos-list>
-      } @else {
-      <router-outlet></router-outlet>
+      } @else if (activeLink() === 'likes') {
+      <photos-list [isUserLiked]="true" [userName]="userInfo$$()!.username"></photos-list>
+      } @else if (activeLink() === 'collections') {
+      <user-collections [userName]="userInfo$$()!.username"></user-collections>
       }
     </div>
   </mat-tab-nav-panel>
