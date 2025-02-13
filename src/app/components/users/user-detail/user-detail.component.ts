@@ -10,7 +10,7 @@ import { PhotosListComponent } from '../../photos/photos-list/photos-list.compon
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterLink } from '@angular/router';
-import { UserCollectionsComponent } from '../user-collections/user-collections.component';
+import { UserCollectionsListComponent } from '../user-collections-list/user-collections-list.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -21,7 +21,7 @@ import { UserCollectionsComponent } from '../user-collections/user-collections.c
     MatChipsModule,
     MatTabsModule,
     RouterLink,
-    UserCollectionsComponent
+    UserCollectionsListComponent
   ],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
@@ -38,7 +38,6 @@ export class UserDetailComponent {
     this.route.params.pipe(takeUntilDestroyed(),
       switchMap((params) => this.userService.getUserByName(params['username'])))
       .subscribe((user: IUser) => {
-        console.log(user);
         this.userInfo$$.set(user);
       });
 

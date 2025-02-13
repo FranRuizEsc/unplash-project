@@ -78,13 +78,13 @@
   </nav>
   <mat-tab-nav-panel #tabPanel>
     <div class="tab-content">
-      @if (activeLink() === 'photos') {
-      <photos-list [userName]="userInfo$$()!.username"></photos-list>
-      } @else if (activeLink() === 'likes') {
-      <photos-list [isUserLiked]="true" [userName]="userInfo$$()!.username"></photos-list>
-      } @else if (activeLink() === 'collections') {
-      <user-collections [userName]="userInfo$$()!.username"></user-collections>
-      }
+      @switch (activeLink()) { @case ('photos') {
+      <photos-list [userName]="userInfo$$()!.username"> </photos-list>
+      } @case ('likes') {
+      <photos-list [userName]="userInfo$$()!.username" [isUserLiked]="true"> </photos-list>
+      } @case ('collections') {
+      <user-collections-list [userName]="userInfo$$()!.username"> </user-collections-list>
+      } }
     </div>
   </mat-tab-nav-panel>
 </div>

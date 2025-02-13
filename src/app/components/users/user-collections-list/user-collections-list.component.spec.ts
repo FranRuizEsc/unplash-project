@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserCollectionsComponent } from './user-collections.component';
+import { UserCollectionsComponent } from './user-collections-list.component';
 
 describe('UserCollectionsComponent', () => {
   let component: UserCollectionsComponent;
@@ -10,7 +10,7 @@ describe('UserCollectionsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [UserCollectionsComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(UserCollectionsComponent);
     component = fixture.componentInstance;

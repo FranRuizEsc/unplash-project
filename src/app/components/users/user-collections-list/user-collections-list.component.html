@@ -1,0 +1,14 @@
+<div class="collection-container">
+  @for(collection of collections$$(); track collection.id){
+  <div class="collection-item">
+    <div class="collection-photo-container">
+      <user-collection-card class="photo-card" [collection]="collection"></user-collection-card>
+    </div>
+    <div class="collection-info-container">
+      <span class="title">{{ collection?.title }}</span>
+      <span class="description">{{ collection?.description }}</span>
+      <span class="total">{{ collection?.total_photos }} fotos</span>
+    </div>
+  </div>
+  }
+</div>
