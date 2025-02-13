@@ -1,0 +1,148 @@
+:host {
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.user-container {
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+
+  .user-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+
+    .image-container {
+      .image {
+        border-radius: 50%;
+      }
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 24px;
+
+      .user-name {
+        font-size: 40px;
+        font-weight: 600;
+        letter-spacing: 2.5px;
+      }
+
+      .user-bio {
+        font-size: 18px;
+        font-weight: 400;
+        max-width: 700px;
+        margin: 16px 0;
+      }
+    }
+
+    .location-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+
+      .user-location {
+        font-size: 15px;
+      }
+    }
+
+    .social-media-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .social-media-portfolio {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .social-media-instagram {
+        .instagram-link-container {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .instagram-icon {
+            width: 24px;
+            height: 24px;
+          }
+
+          .instagram-username {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+
+    .user-interests {
+      .category-chips {
+        margin-top: 8px;
+      }
+    }
+  }
+
+  .navigation-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  // ! I need importants for change materials styles
+  ::ng-deep {
+    .mat-mdc-tab-nav-bar {
+      --mat-tab-header-active-focus-indicator-color: #808080;
+      --mat-tab-header-active-hover-indicator-color: #808080;
+      --mat-tab-header-active-indicator-color: #808080;
+      --mat-tab-header-inactive-hover-indicator-color: #808080;
+    }
+
+    .mat-mdc-tab-link {
+      color: rgba(0, 0, 0, 0.6) !important;
+
+      &:hover {
+        background-color: rgba(128, 128, 128, 0.04);
+      }
+
+      &.mdc-tab--active {
+        color: #808080 !important;
+      }
+    }
+
+    .mdc-tab-indicator__content {
+      border-color: #808080 !important;
+    }
+
+    .mdc-tab__text-label {
+      color: inherit !important;
+    }
+
+    .mat-ripple-element {
+      background-color: rgba(128, 128, 128, 0.1) !important;
+    }
+  }
+
+  mat-tab-nav-panel {
+    flex: 1;
+    display: flex;
+    overflow-y: auto;
+  }
+
+  .tab-content {
+    flex: 1;
+    position: relative;
+  }
+}

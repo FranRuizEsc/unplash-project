@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearcherHeaderComponent } from './searcher-header.component';
+import { UserDetailComponent } from './user-detail.component';
 
-describe('SearcherHeaderComponent', () => {
-  let component: SearcherHeaderComponent;
-  let fixture: ComponentFixture<SearcherHeaderComponent>;
+describe('UserDetailComponent', () => {
+  let component: UserDetailComponent;
+  let fixture: ComponentFixture<UserDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearcherHeaderComponent]
+      imports: [UserDetailComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SearcherHeaderComponent);
+    fixture = TestBed.createComponent(UserDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
