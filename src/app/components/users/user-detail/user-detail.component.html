@@ -53,7 +53,7 @@
   <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="navigation-tabs">
     <a
       mat-tab-link
-      [routerLink]="['photos']"
+      [routerLink]="['.']"
       (click)="setActiveLink('photos')"
       [active]="activeLink() === 'photos'"
     >
@@ -76,8 +76,14 @@
       Collections ({{ userInfo$$()!.total_collections }})
     </a>
   </nav>
-  <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+  <mat-tab-nav-panel #tabPanel>
+    <div class="tab-content">
+      @if (activeLink() === 'photos') {
+      <photos-list [userName]="userInfo$$()!.username"></photos-list>
+      } @else {
+      <router-outlet></router-outlet>
+      }
+    </div>
+  </mat-tab-nav-panel>
 </div>
-
-<photos-list class="photos-list" [userName]="userInfo$$()!.username"></photos-list>
 }

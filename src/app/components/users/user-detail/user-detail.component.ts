@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { ToolbarComponent } from '../../../shared/components/toolbar/toolbar.component';
 import { switchMap } from 'rxjs';
@@ -20,6 +20,7 @@ import { RouterLink } from '@angular/router';
     MatChipsModule,
     MatTabsModule,
     RouterLink,
+    RouterOutlet
   ],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',

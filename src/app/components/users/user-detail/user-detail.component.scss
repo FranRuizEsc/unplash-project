@@ -126,9 +126,19 @@
         background-color: rgba(128, 128, 128, 0.1) !important;
       }
     }
-  }
-  .photos-list {
-    margin-top: 20px;
-    height: calc(100% - 560px);
+
+    mat-tab-nav-panel {
+      height: calc(100vh - 160px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tab-content {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+    }
   }
 }
