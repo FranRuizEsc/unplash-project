@@ -7,6 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserService } from '../../../core/services/user.service';
 import { IPhoto } from '../../../core/models/photo-info.interface';
 import { map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'photos-list',
@@ -21,6 +22,7 @@ export class PhotosListComponent implements OnInit {
 
   private photoService = inject(PhotoService);
   private userService = inject(UserService);
+  private router = inject(Router);
   private page = 1
 
   protected isLoading = false;
@@ -37,6 +39,10 @@ export class PhotosListComponent implements OnInit {
       this.page++
       this.loadPhotos();
     }
+  }
+
+  protected goToUserDetail(userName: string) {
+    this.router.navigate(['/user', userName]);
   }
 
   private loadPhotos() {

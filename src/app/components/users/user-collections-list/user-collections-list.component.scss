@@ -16,19 +16,20 @@
     width: 450px;
 
     .collection-photo-container {
+      position: relative;
       height: 250px;
-      width: 450px;
       overflow: hidden;
 
       .photo-card {
-        display: block;
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+        position: absolute;
+        width: 100%;
+        height: 100%;
       }
+
+      // &:hover {
+      //   filter: brightness(1.2);
+      //   cursor: pointer;
+      // }
     }
 
     .collection-info-container {

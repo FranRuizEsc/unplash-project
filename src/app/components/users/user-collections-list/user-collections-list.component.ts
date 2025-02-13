@@ -20,7 +20,6 @@ export class UserCollectionsListComponent implements OnInit {
     this.getCollections(this.userName());
   }
 
-
   private getCollections(userName: string) {
     this.userService.getUserCollections(userName).subscribe((collections) => {
       this.collections$$.set(collections)
