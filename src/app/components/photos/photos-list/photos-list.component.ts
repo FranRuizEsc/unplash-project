@@ -7,6 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserService } from '../../../core/services/user.service';
 import { IPhoto } from '../../../core/models/photo-info.interface';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'photos-list',
@@ -55,7 +56,7 @@ export class PhotosListComponent implements OnInit {
     }
   }
 
-  private getPhotosBasedOnContext() {
+  private getPhotosBasedOnContext(): Observable<IPhoto[]> {
     const searchTerm = this.searchTerm();
     const userName = this.userName();
     const isUserLiked = this.isUserLiked();

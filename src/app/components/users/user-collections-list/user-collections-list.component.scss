@@ -26,10 +26,12 @@
         height: 100%;
       }
 
-      // &:hover {
-      //   filter: brightness(1.2);
-      //   cursor: pointer;
-      // }
+      &:hover {
+        filter: brightness(1.2);
+        height: 255px;
+        width: 455px;
+        cursor: pointer;
+      }
     }
 
     .collection-info-container {

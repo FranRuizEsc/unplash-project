@@ -61,7 +61,7 @@
       [active]="activeLink() === 'photos'"
     >
       <mat-icon class="nav-icon material-icons-outlined">image</mat-icon>
-      Photos ({{ userInfo$$()!.total_photos }})
+      Photos ({{ formatNumber(userInfo$$()!.total_photos) }})
     </a>
     <a
       mat-tab-link
@@ -70,7 +70,7 @@
       [active]="activeLink() === 'likes'"
     >
       <mat-icon class="nav-icon material-icons-outlined">favorite</mat-icon>
-      Likes ({{ userInfo$$()!.total_likes }})
+      Likes ({{ formatNumber(userInfo$$()!.total_likes) }})
     </a>
     <a
       mat-tab-link
@@ -79,7 +79,7 @@
       [active]="activeLink() === 'collections'"
     >
       <mat-icon class="nav-icon material-icons-outlined">photo_library</mat-icon>
-      Collections ({{ userInfo$$()!.total_collections }})
+      Collections ({{ formatNumber(userInfo$$()!.total_collections) }})
     </a>
   </nav>
   <mat-tab-nav-panel #tabPanel>

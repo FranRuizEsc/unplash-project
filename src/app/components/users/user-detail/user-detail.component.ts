@@ -63,4 +63,8 @@ export class UserDetailComponent {
   protected setActiveLink(link: string) {
     this.activeLink.set(link);
   }
+
+  protected formatNumber(number: number): string {
+    return new Intl.NumberFormat('es-ES').format(number);
+  }
 }
