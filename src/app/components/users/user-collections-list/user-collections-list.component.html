@@ -12,3 +12,9 @@
   </div>
   }
 </div>
+
+@if(isLoading) {
+<div class="loading">
+  <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
+</div>
+}

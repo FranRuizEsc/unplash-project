@@ -1,32 +1,22 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PhotosListComponent } from '../../../components/photos/photos-list/photos-list.component';
-import { ToolbarComponent } from '../toolbar/toolbar.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-search-result',
-  imports: [PhotosListComponent, ToolbarComponent],
+  imports: [PhotosListComponent],
   templateUrl: './search-result.component.html',
   styleUrl: './search-result.component.scss'
 })
-export class SearchResultComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private subscription = new Subscription();
+export class SearchResultComponent {
 
-  protected searchTerm: string = '';
-  protected searchResult: any[] = [];
-
-  ngOnInit() {
-    const queryParams$ = this.route.queryParams
-
-    this.subscription.add(queryParams$.subscribe((queryParams) => {
-      this.searchTerm = queryParams['searchTerm'];
-    }));
-  }
+  protected searchTerm$$ = signal<string>('')
 
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  constructor(private route: ActivatedRoute) {
+    this.route.queryParams.pipe(takeUntilDestroyed()).subscribe((queryParams) => {
+      this.searchTerm$$.set(queryParams['searchTerm']);
+    });
   }
 }

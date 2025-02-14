@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { ICollection } from '../../../core/models/collection.interface';
 
 @Component({
   selector: 'user-collection-card',
@@ -8,6 +9,6 @@ import { Component, input } from '@angular/core';
 })
 export class UserCollectionCardComponent {
 
-  collection = input.required<any>()
+  collection = input.required<ICollection>()
 
 }

@@ -14,11 +14,12 @@
         type="text"
         class="search-input"
         placeholder="Search"
-        [(ngModel)]="searchTerm"
+        [ngModel]="searchTerm$$()"
+        (ngModelChange)="searchTerm$$.set($event)"
         name="searchTerm"
         (keyup.enter)="search()"
       />
-      @if(searchTerm) {
+      @if(searchTerm$$()) {
       <button mat-icon-button type="button" class="close-button" (click)="navigateTohome()">
         <mat-icon>close</mat-icon>
       </button>

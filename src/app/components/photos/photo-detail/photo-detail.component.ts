@@ -32,7 +32,7 @@ export class PhotoDetailComponent {
         const photoId = this.data?.id || params['photo_id'];
         return photoId ? this.photoService.getPhotoById(photoId) : of(null);
       })
-    ).subscribe((photo: IPhoto) => {
+    ).subscribe((photo: IPhoto | null) => {
       if (photo) {
         this.photoInfo$$.set(photo);
       }

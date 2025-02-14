@@ -6,7 +6,6 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserService } from '../../../core/services/user.service';
 import { IPhoto } from '../../../core/models/photo-info.interface';
-import { map } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,15 +25,16 @@ export class PhotosListComponent implements OnInit {
   private page = 1
 
   protected isLoading = false;
-  protected listPhotos: any[] = [];
+  protected listPhotos: IPhoto[] = [];
 
 
   ngOnInit() {
     this.loadPhotos();
   }
 
-  onScroll(event: any) {
-    const { scrollTop, scrollHeight, clientHeight } = event.target;
+  onScroll(event: Event) {
+    const target = event.target as HTMLElement;
+    const { scrollTop, scrollHeight, clientHeight } = target;
     if (scrollTop + clientHeight >= scrollHeight - 100) {
       this.page++
       this.loadPhotos();
@@ -61,7 +61,7 @@ export class PhotosListComponent implements OnInit {
     const isUserLiked = this.isUserLiked();
 
     if (searchTerm) {
-      return this.photoService.searchPhotos(searchTerm, this.page).pipe(map((response) => response.results));
+      return this.photoService.searchPhotos(searchTerm, this.page);
     }
     if (isUserLiked && userName) {
       return this.userService.getUserPhotosLiked(userName, this.page);

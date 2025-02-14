@@ -1,6 +1,6 @@
 :host {
   overflow: hidden;
-  height: 100%;
+  height: calc(100% - 15px);
   width: 100%;
 
   .main-container {

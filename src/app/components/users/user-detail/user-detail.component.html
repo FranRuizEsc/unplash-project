@@ -1,5 +1,4 @@
 @if(userInfo$$()) {
-<app-toolbar></app-toolbar>
 <div class="user-container">
   <div class="user-wrapper">
     <div class="image-container">
@@ -10,10 +9,12 @@
       <div class="user-info">
         <span class="user-name">{{ userInfo$$()!.name }}</span>
         <span class="user-bio">{{ userInfo$$()!.bio }}</span>
+        @if(userInfo$$()!.location) {
         <div class="location-container" (click)="goTolocationSearch(userInfo$$()!.location)">
           <mat-icon class="material-icons-outlined">location_on</mat-icon>
           <span class="user-location">{{ userInfo$$()!.location }}</span>
         </div>
+        }
         <div class="user-stats-container">
           <div class="social-media-container">
             @if(userInfo$$()!.social!.portfolio_url) {
@@ -37,8 +38,9 @@
             }
           </div>
         </div>
+        @if(userInfo$$()!.tags.custom.length > 0) {
         <div class="user-interests">
-          <span class="interests-title">Interests</span>
+          <span class="interests-title">Interests:</span>
           <mat-chip-set class="category-chips">
             @for (userTag of userInfo$$()!.tags.custom; track userTag.title) {
             <mat-chip class="chip" (click)="openCategory(userTag.title)">{{
@@ -47,6 +49,7 @@
             }
           </mat-chip-set>
         </div>
+        }
       </div>
     </div>
   </div>
@@ -57,6 +60,7 @@
       (click)="setActiveLink('photos')"
       [active]="activeLink() === 'photos'"
     >
+      <mat-icon class="nav-icon material-icons-outlined">image</mat-icon>
       Photos ({{ userInfo$$()!.total_photos }})
     </a>
     <a
@@ -65,6 +69,7 @@
       (click)="setActiveLink('likes')"
       [active]="activeLink() === 'likes'"
     >
+      <mat-icon class="nav-icon material-icons-outlined">favorite</mat-icon>
       Likes ({{ userInfo$$()!.total_likes }})
     </a>
     <a
@@ -73,15 +78,17 @@
       (click)="setActiveLink('collections')"
       [active]="activeLink() === 'collections'"
     >
+      <mat-icon class="nav-icon material-icons-outlined">photo_library</mat-icon>
       Collections ({{ userInfo$$()!.total_collections }})
     </a>
   </nav>
   <mat-tab-nav-panel #tabPanel>
     <div class="tab-content">
       @switch (activeLink()) { @case ('photos') {
-      <photos-list [userName]="userInfo$$()!.username"> </photos-list>
+      <photos-list class="photos-list" [userName]="userInfo$$()!.username"> </photos-list>
       } @case ('likes') {
-      <photos-list [userName]="userInfo$$()!.username" [isUserLiked]="true"> </photos-list>
+      <photos-list class="photos-list" [userName]="userInfo$$()!.username" [isUserLiked]="true">
+      </photos-list>
       } @case ('collections') {
       <user-collections-list [userName]="userInfo$$()!.username"> </user-collections-list>
       } }

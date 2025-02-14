@@ -1,1 +1,9 @@
-<img class="photo" [src]="photo.urls.small" alt="Photo" (click)="openPhotoDetailDialog(photo.id)" />
+@if(photo()) {
+<img
+  class="photo"
+  [src]="photo()!.urls.small"
+  alt="Photo"
+  (click)="openPhotoDetailDialog(photo()!.id)"
+/>
+
+}

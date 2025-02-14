@@ -46,3 +46,9 @@ export interface IPhoto {
 	tags: { title: string }[];
 	views: number
 }
+
+export interface IPhotoSearchResult {
+	results: IPhoto[];
+	total: number;
+	total_pages: number;
+}

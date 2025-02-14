@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 
 :host {
-  height: calc(100% - 150px);
+  height: calc(100% - 32px);
   width: 100%;
   display: flex;
   flex-direction: column;
