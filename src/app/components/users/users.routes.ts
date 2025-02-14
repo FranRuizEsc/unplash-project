@@ -1,15 +1,33 @@
 import { Routes } from "@angular/router";
 import { UserDetailComponent } from "./user-detail/user-detail.component";
-import { PhotosListComponent } from "../photos/photos-list/photos-list.component";
-import { UserCollectionsListComponent } from "./user-collections-list/user-collections-list.component";
 
 export const USER_ROUTES: Routes = [
 	{
-		path: ':username', component: UserDetailComponent,
+		path: ':username',
+		component: UserDetailComponent,
 		children: [
-			{ path: '', component: PhotosListComponent },
-			{ path: 'likes', component: PhotosListComponent },
-			{ path: 'collections', component: UserCollectionsListComponent }
+			{
+				path: '',
+				loadComponent: () => import('../photos/photos-list/photos-list.component')
+					.then(m => m.PhotosListComponent)
+			},
+			{
+				path: 'likes',
+				loadComponent: () => import('../photos/photos-list/photos-list.component')
+					.then(m => m.PhotosListComponent)
+			},
+			{
+				path: 'collections',
+				loadComponent: () => import('./user-collections-list/user-collections-list.component')
+					.then(m => m.UserCollectionsListComponent),
+				children: [
+					{
+						path: ':collectionId',
+						loadComponent: () => import('./user-collection-photos/user-collection-photos.component')
+							.then(m => m.UserCollectionPhotosComponent)
+					}
+				]
+			}
 		]
 	}
 ]
