@@ -18,4 +18,14 @@ export interface ICollection {
 		html: string;
 		photos: string;
 	};
+	preview_photos: [{
+		urls: {
+			small: string;
+			regular: string;
+			full: string;
+			raw: string;
+			thumb: string;
+		}
+	}]
+
 }

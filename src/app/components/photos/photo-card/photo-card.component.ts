@@ -1,4 +1,5 @@
-import { Component, inject, Input } from '@angular/core';
+import { IPhoto } from './../../../core/models/photo-info.interface';
+import { Component, inject, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { PhotoDetailComponent } from '../photo-detail/photo-detail.component';
@@ -9,11 +10,13 @@ import { PhotoDetailComponent } from '../photo-detail/photo-detail.component';
   styleUrl: './photo-card.component.scss'
 })
 export class PhotoCardComponent {
-  @Input({ required: true }) photo: any;
+  photo = input.required<IPhoto>()
 
   private matDialog = inject(MatDialog);
 
   protected openPhotoDetailDialog(photoId: string) {
+    if (!photoId) return;
+
     history.pushState(null, '', `/photo/${photoId}`);
 
     const dialog = this.matDialog.open(PhotoDetailComponent, {
