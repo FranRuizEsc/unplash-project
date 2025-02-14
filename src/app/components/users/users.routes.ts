@@ -20,14 +20,7 @@ export const USER_ROUTES: Routes = [
 				path: 'collections',
 				loadComponent: () => import('./user-collections-list/user-collections-list.component')
 					.then(m => m.UserCollectionsListComponent),
-				children: [
-					{
-						path: ':collectionId',
-						loadComponent: () => import('./user-collection-photos/user-collection-photos.component')
-							.then(m => m.UserCollectionPhotosComponent)
-					}
-				]
 			}
 		]
-	}
+	},
 ]

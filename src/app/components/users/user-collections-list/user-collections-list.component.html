@@ -2,7 +2,11 @@
   @for(collection of collections$$(); track collection.id){
   <div class="collection-item">
     <div class="collection-photo-container">
-      <user-collection-card class="photo-card" [collection]="collection"></user-collection-card>
+      <user-collection-card
+        class="photo-card"
+        [collection]="collection"
+        (click)="openCollection(collection.id)"
+      />
     </div>
     <div class="collection-info-container">
       <span class="title">{{ collection?.title }}</span>
@@ -15,6 +19,6 @@
 
 @if(isLoading) {
 <div class="loading">
-  <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
+  <mat-progress-spinner [mode]="'indeterminate'" />
 </div>
 }

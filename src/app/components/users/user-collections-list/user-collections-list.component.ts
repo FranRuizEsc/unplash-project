@@ -3,6 +3,7 @@ import { UserCollectionCardComponent } from '../user-collection-card/user-collec
 import { UserService } from '../../../core/services/user.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ICollection } from '../../../core/models/collection.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'user-collections-list',
@@ -15,13 +16,17 @@ export class UserCollectionsListComponent implements OnInit {
   userName = input.required<string>();
 
   private userService = inject(UserService);
+  private router = inject(Router);
 
   protected collections$$ = signal<ICollection[]>([]);
   protected isLoading: boolean = false;
 
   ngOnInit() {
-    this.isLoading = true;
     this.getCollections(this.userName());
+  }
+
+  protected openCollection(collectionId: number) {
+    this.router.navigate(['/collection', collectionId]);
   }
 
   private getCollections(userName: string) {

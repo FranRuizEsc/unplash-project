@@ -85,12 +85,11 @@
   <mat-tab-nav-panel #tabPanel>
     <div class="tab-content">
       @switch (activeLink()) { @case ('photos') {
-      <photos-list class="photos-list" [userName]="userInfo$$()!.username"> </photos-list>
+      <photos-list class="photos-list" [userName]="userInfo$$()!.username" />
       } @case ('likes') {
-      <photos-list class="photos-list" [userName]="userInfo$$()!.username" [isUserLiked]="true">
-      </photos-list>
+      <photos-list class="photos-list" [userName]="userInfo$$()!.username" [isUserLiked]="true" />
       } @case ('collections') {
-      <user-collections-list [userName]="userInfo$$()!.username"> </user-collections-list>
+      <user-collections-list [userName]="userInfo$$()!.username" />
       } }
     </div>
   </mat-tab-nav-panel>
