@@ -27,5 +27,7 @@ export interface ICollection {
 			thumb: string;
 		}
 	}]
-
+	hasPhotos?: boolean;
 }
+
+

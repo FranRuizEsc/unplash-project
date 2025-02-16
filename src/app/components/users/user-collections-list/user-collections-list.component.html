@@ -7,6 +7,14 @@
         [collection]="collection"
         (click)="openCollection(collection.id)"
       />
+      @if(!collection.hasPhotos) {
+      <div
+        class="private-overlay"
+        [matTooltip]="'The unsplash API is not available for this request.'"
+      >
+        <mat-icon class="lock-icon">lock</mat-icon>
+      </div>
+      }
     </div>
     <div class="collection-info-container">
       <span class="title">{{ collection?.title }}</span>

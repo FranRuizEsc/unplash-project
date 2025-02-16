@@ -32,6 +32,26 @@
         width: 455px;
         cursor: pointer;
       }
+
+      .private-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        .lock-icon {
+          color: white;
+          font-size: 48px;
+          width: 48px;
+          height: 48px;
+        }
+      }
     }
 
     .collection-info-container {
