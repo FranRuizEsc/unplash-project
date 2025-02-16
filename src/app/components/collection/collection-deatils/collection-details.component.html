@@ -1,1 +1,31 @@
+@if(collection) {
+<div class="collection-info-container">
+  <div class="collection-image-container">
+    <img
+      class="collection-image"
+      [src]="collection.preview_photos[0].urls.thumb"
+      alt="image-detail"
+    />
+  </div>
+  <div class="collection-info">
+    <h1 class="collection-title">{{ collection.title }}</h1>
+    @if(collection.description) {
+    <span class="collection-description">{{ collection.description }}</span>
+    }
+    <div class="collection-user-container">
+      <span class="collection-user-label">Author: </span>
+      <span class="collection-user" (click)="goToUserDetail()">{{ collection.user.username }}</span>
+    </div>
+    <span class="collection-total-photos">{{ collection.total_photos }} photos</span>
+
+    <mat-chip-set class="category-chips">
+      @for (collectionTag of collection.tags; track collectionTag.title) {
+      <mat-chip class="chip" (click)="openCategory(collectionTag.title)">{{
+        collectionTag.title
+      }}</mat-chip>
+      }
+    </mat-chip-set>
+  </div>
+</div>
+}
 <photos-list [collectionId]="collectionId"></photos-list>

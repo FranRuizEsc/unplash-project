@@ -38,7 +38,7 @@ export class UserCollectionsListComponent implements OnInit {
     this.userService.getUserCollections(userName).pipe(
       switchMap(collections => {
         const collectionObservables = collections.map((collection: ICollection) =>
-          this.collectionService.getCollectionById(collection.id.toString()).pipe(
+          this.collectionService.getCollectionPhotosById(collection.id.toString()).pipe(
             map(photos => ({
               ...collection,
               hasPhotos: photos.length > 0

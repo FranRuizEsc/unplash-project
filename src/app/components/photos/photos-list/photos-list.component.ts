@@ -70,7 +70,7 @@ export class PhotosListComponent implements OnInit {
     const collectionId = this.collectionId();
 
     if (collectionId) {
-      return this.collectionService.getCollectionById(collectionId, this.page);
+      return this.collectionService.getCollectionPhotosById(collectionId, this.page);
     }
     if (searchTerm) {
       return this.photoService.searchPhotos(searchTerm, this.page);

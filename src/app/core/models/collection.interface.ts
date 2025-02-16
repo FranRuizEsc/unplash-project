@@ -28,6 +28,10 @@ export interface ICollection {
 		}
 	}]
 	hasPhotos?: boolean;
+	tags: [{
+		type: string;
+		title: string
+	}]
 }
 
 
