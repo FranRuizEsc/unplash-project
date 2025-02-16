@@ -1,33 +1,21 @@
 import { Component } from '@angular/core';
-import { CollectionService } from '../../../core/services/collection.service';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PhotosListComponent } from '../../photos/photos-list/photos-list.component';
 
 @Component({
   selector: 'collection-details',
-  imports: [],
+  imports: [PhotosListComponent],
   templateUrl: './collection-details.component.html',
   styleUrl: './collection-details.component.scss'
 })
 export class CollectionDetailsComponent {
-  protected hasImages = false
+  protected collectionId: string;
 
   constructor(
-    private collectionService: CollectionService,
     private route: ActivatedRoute) {
     this.route.params.pipe(takeUntilDestroyed()).subscribe((queryParams) => {
-      this.getColectionById(queryParams['collectionId']);
-    })
-  }
-
-  protected getColectionById(collectionId: string) {
-    this.collectionService.getCollectionById(collectionId).subscribe((collection) => {
-      if (collection.length > 0) {
-        this.hasImages = true;
-      }
-      console.log('collectionsnsnsnsns', collection);
+      this.collectionId = queryParams['collectionId'];
     })
   }
 }
-
-

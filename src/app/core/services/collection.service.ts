@@ -11,7 +11,7 @@ export class CollectionService {
 
   private http = inject(HttpClient);
 
-  getCollectionById(collectionId: string): Observable<IPhoto[]> {
-    return this.http.get<IPhoto[]>(`${environment.apiUrl}/collections/${collectionId}/photos`);
+  getCollectionById(collectionId: string, page = 1): Observable<IPhoto[]> {
+    return this.http.get<IPhoto[]>(`${environment.apiUrl}/collections/${collectionId}/photos`, { params: { page, per_page: 15 } });
   }
 }
