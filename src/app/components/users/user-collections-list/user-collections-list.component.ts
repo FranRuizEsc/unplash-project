@@ -11,7 +11,12 @@ import { forkJoin, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'user-collections-list',
-  imports: [UserCollectionCardComponent, MatProgressSpinnerModule, MatTooltipModule, MatIconModule],
+  imports: [
+    UserCollectionCardComponent,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    MatIconModule
+  ],
   templateUrl: './user-collections-list.component.html',
   styleUrl: './user-collections-list.component.scss'
 })
