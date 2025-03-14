@@ -12,7 +12,12 @@ import { CollectionService } from '../../../core/services/collection.service';
 
 @Component({
   selector: 'photos-list',
-  imports: [PhotoCardComponent, CommonModule, ScrollingModule, MatProgressSpinnerModule],
+  imports: [
+    PhotoCardComponent,
+    CommonModule,
+    ScrollingModule,
+    MatProgressSpinnerModule
+  ],
   templateUrl: './photos-list.component.html',
   styleUrl: './photos-list.component.scss'
 })

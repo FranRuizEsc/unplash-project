@@ -10,7 +10,7 @@
         <span class="user-name">{{ userInfo$$()!.name }}</span>
         <span class="user-bio">{{ userInfo$$()!.bio }}</span>
         @if(userInfo$$()!.location) {
-        <div class="location-container" (click)="goTolocationSearch(userInfo$$()!.location)">
+        <div class="location-container" (click)="goToLocationSearch(userInfo$$()!.location)">
           <mat-icon class="material-icons-outlined">location_on</mat-icon>
           <span class="user-location">{{ userInfo$$()!.location }}</span>
         </div>

@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CollectionService } from '../../../core/services/collection.service';
-import { forkJoin, map, switchMap } from 'rxjs';
+import { switchMap, map, forkJoin } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'user-collections-list',
@@ -15,7 +17,9 @@ import { forkJoin, map, switchMap } from 'rxjs';
     UserCollectionCardComponent,
     MatProgressSpinnerModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    CommonModule,
+    ScrollingModule
   ],
   templateUrl: './user-collections-list.component.html',
   styleUrl: './user-collections-list.component.scss'
