@@ -61,7 +61,6 @@ export class UserCollectionsListComponent implements OnInit {
     this.isLoading = true;
     this.getCollections(this.userName(), this.page).subscribe((collectionsWithStatus: ICollection[]) => {
       this.updateCollections(collectionsWithStatus);
-      console.log(collectionsWithStatus);
       this.isLoading = false;
     });
   }
