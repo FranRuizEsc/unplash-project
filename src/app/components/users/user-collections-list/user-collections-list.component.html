@@ -1,5 +1,5 @@
-<div class="collection-container">
-  @for(collection of collections$$(); track collection.id){
+<div class="collection-container" (scroll)="onScroll($event)">
+  @for(collection of collections; track collection.id){
   <div class="collection-item">
     <div class="collection-photo-container">
       <user-collection-card

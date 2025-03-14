@@ -1,5 +1,5 @@
 import { ICollection } from './../../../core/models/collection.interface';
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { UserCollectionCardComponent } from '../user-collection-card/user-collection-card.component';
 import { UserService } from '../../../core/services/user.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -19,46 +19,74 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MatTooltipModule,
     MatIconModule,
     CommonModule,
-    ScrollingModule
+    ScrollingModule,
   ],
   templateUrl: './user-collections-list.component.html',
-  styleUrl: './user-collections-list.component.scss'
+  styleUrl: './user-collections-list.component.scss',
 })
 export class UserCollectionsListComponent implements OnInit {
-
   userName = input.required<string>();
 
   private userService = inject(UserService);
-  private collectionService = inject(CollectionService)
+  private collectionService = inject(CollectionService);
   private router = inject(Router);
 
-  protected collections$$ = signal<ICollection[]>([]);
+  private page = 1;
+  private hasMorePhotos = true;
+
+  protected collections: ICollection[] = [];
   protected isLoading: boolean = false;
 
   ngOnInit() {
-    this.getCollections(this.userName());
+    this.loadCollections();
+  }
+
+  onScroll(event: Event) {
+    const target = event.target as HTMLElement;
+    const { scrollTop, scrollHeight, clientHeight } = target;
+    if (scrollTop + clientHeight >= scrollHeight - 100 && this.hasMorePhotos) {
+      this.page++;
+      this.loadCollections();
+    }
   }
 
   protected openCollection(collectionId: number) {
     this.router.navigate(['/collection', collectionId]);
   }
 
-  private getCollections(userName: string) {
-    this.userService.getUserCollections(userName).pipe(
-      switchMap(collections => {
-        const collectionObservables = collections.map((collection: ICollection) =>
-          this.collectionService.getCollectionPhotosById(collection.id.toString()).pipe(
-            map(photos => ({
-              ...collection,
-              hasPhotos: photos.length > 0
-            }))
-          )
-        );
-        return forkJoin(collectionObservables);
-      })
-    ).subscribe((collectionsWithStatus: ICollection[]) => {
-      this.collections$$.set(collectionsWithStatus);
+
+  private loadCollections() {
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+    this.getCollections(this.userName(), this.page).subscribe((collectionsWithStatus: ICollection[]) => {
+      this.updateCollections(collectionsWithStatus);
+      console.log(collectionsWithStatus);
       this.isLoading = false;
     });
+  }
+
+  private updateCollections(collections: ICollection[]) {
+    const existingIds = new Set(this.collections.map(collection => collection.id));
+    collections = collections.filter(collection => !existingIds.has(collection.id));
+    this.collections = [...this.collections, ...collections];
+  }
+
+  private getCollections(userName: string, page: number) {
+    return this.userService
+      .getUserCollections(userName, page)
+      .pipe(
+        switchMap(collections => {
+          const collectionObservables = collections.map((collection: ICollection) =>
+            this.collectionService.getCollectionPhotosById(collection.id.toString()).pipe(
+              map(photos => ({
+                ...collection,
+                hasPhotos: photos.length > 0,
+              }))
+            )
+          );
+          return forkJoin(collectionObservables);
+        })
+      );
   }
 }
