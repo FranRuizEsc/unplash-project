@@ -7,11 +7,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
 import { IPhoto } from '../../../core/models/photo-info.interface';
 import { PhotoService } from '../../../core/services/photo.service';
-import { ToolbarComponent } from '../../../shared/components/toolbar/toolbar.component';
 
 @Component({
   selector: 'app-photo-detail',
-  imports: [MatChipsModule, CommonModule, ToolbarComponent],
+  imports: [MatChipsModule, CommonModule],
   templateUrl: './photo-detail.component.html',
   styleUrl: './photo-detail.component.scss',
 })

@@ -27,5 +27,11 @@ export interface ICollection {
 			thumb: string;
 		}
 	}]
-
+	hasPhotos?: boolean;
+	tags: [{
+		type: string;
+		title: string
+	}]
 }
+
+

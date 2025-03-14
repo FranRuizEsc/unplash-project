@@ -8,7 +8,5 @@ import { ICollection } from '../../../core/models/collection.interface';
   styleUrl: './user-collection-card.component.scss'
 })
 export class UserCollectionCardComponent {
-
   collection = input.required<ICollection>()
-
 }

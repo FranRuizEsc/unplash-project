@@ -150,12 +150,12 @@
   mat-tab-nav-panel {
     flex: 1;
     display: flex;
-    overflow-y: auto;
+    margin-bottom: 32px;
   }
 
   .tab-content {
     flex: 1;
     position: relative;
-    height: calc(100% - 50px);
+    height: calc(100vh - 500px);
   }
 }

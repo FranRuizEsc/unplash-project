@@ -1,6 +1,4 @@
-@if(photoInfo$$()) { @if(!isDialog) {
-<app-toolbar></app-toolbar>
-}
+@if(photoInfo$$()) {
 <div
   class="photo-detail-container"
   [ngStyle]="isDialog ? { 'overflow-y': 'auto' } : { 'overflow-y': '' }"

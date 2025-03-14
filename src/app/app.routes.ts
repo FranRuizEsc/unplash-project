@@ -16,5 +16,9 @@ export const ROUTES: Routes = [
 	{
 		path: 'user',
 		loadChildren: () => import('./components/users/users.routes').then((m) => m.USER_ROUTES)
+	},
+	{
+		path: 'collection',
+		loadChildren: () => import('./components/collection/collection.routes').then((m) => m.COLLECTION_ROUTES)
 	}
 ]

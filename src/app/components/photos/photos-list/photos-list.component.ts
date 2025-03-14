@@ -7,10 +7,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserService } from '../../../core/services/user.service';
 import { IPhoto } from '../../../core/models/photo-info.interface';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CollectionService } from '../../../core/services/collection.service';
 
 @Component({
   selector: 'photos-list',
-  imports: [PhotoCardComponent, CommonModule, ScrollingModule, MatProgressSpinnerModule],
+  imports: [
+    PhotoCardComponent,
+    CommonModule,
+    ScrollingModule,
+    MatProgressSpinnerModule
+  ],
   templateUrl: './photos-list.component.html',
   styleUrl: './photos-list.component.scss'
 })
@@ -18,11 +25,16 @@ export class PhotosListComponent implements OnInit {
   searchTerm = input<string>()
   userName = input<string>()
   isUserLiked = input<boolean>()
+  collectionId = input<string>()
+
 
   private photoService = inject(PhotoService);
   private userService = inject(UserService);
+  private collectionService = inject(CollectionService);
   private router = inject(Router);
+
   private page = 1
+  private hasMorePhotos = true;
 
   protected isLoading = false;
   protected listPhotos: IPhoto[] = [];
@@ -35,7 +47,7 @@ export class PhotosListComponent implements OnInit {
   onScroll(event: Event) {
     const target = event.target as HTMLElement;
     const { scrollTop, scrollHeight, clientHeight } = target;
-    if (scrollTop + clientHeight >= scrollHeight - 100) {
+    if (scrollTop + clientHeight >= scrollHeight - 100 && this.hasMorePhotos) {
       this.page++
       this.loadPhotos();
     }
@@ -46,20 +58,25 @@ export class PhotosListComponent implements OnInit {
   }
 
   private loadPhotos() {
-    if (!this.isLoading) {
-      this.isLoading = true;
-      this.getPhotosBasedOnContext().subscribe((photos => {
-        this.updatePhotosList(photos);
-        this.isLoading = false;
-      }));
-    }
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+    this.getPhotosBasedOnContext().subscribe((photos) => {
+      this.hasMorePhotos = photos.length > 0;
+      this.updatePhotosList(photos);
+      this.isLoading = false;
+    });
   }
 
-  private getPhotosBasedOnContext() {
+  private getPhotosBasedOnContext(): Observable<IPhoto[]> {
     const searchTerm = this.searchTerm();
     const userName = this.userName();
     const isUserLiked = this.isUserLiked();
+    const collectionId = this.collectionId();
 
+    if (collectionId) {
+      return this.collectionService.getCollectionPhotosById(collectionId, this.page);
+    }
     if (searchTerm) {
       return this.photoService.searchPhotos(searchTerm, this.page);
     }
