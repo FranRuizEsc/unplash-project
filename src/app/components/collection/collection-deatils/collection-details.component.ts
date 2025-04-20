@@ -37,10 +37,7 @@ export class CollectionDetailsComponent {
 
   private getCollectionInfo(collectionId: string) {
     this.collectionService.getCollectionById(collectionId).subscribe((collection: ICollection) => {
-      console.log(collection)
       this.collection = collection
     })
   }
-
-
 }

@@ -1,4 +1,4 @@
 export const environment = {
-	production: false,
+	production: true,
 	apiKey: 'CECRET_API_KEY',
 }; 

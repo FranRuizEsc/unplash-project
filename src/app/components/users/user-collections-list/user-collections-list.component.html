@@ -1,4 +1,10 @@
-<div class="collection-container">
+<cdk-virtual-scroll-viewport
+  class="collection-container"
+  [itemSize]="450"
+  minBufferPx="800"
+  maxBufferPx="1000"
+  (scroll)="onScroll($event)"
+>
   @for(collection of collections$$(); track collection.id){
   <div class="collection-item">
     <div class="collection-photo-container">
@@ -23,7 +29,7 @@
     </div>
   </div>
   }
-</div>
+</cdk-virtual-scroll-viewport>
 
 @if(isLoading) {
 <div class="loading">

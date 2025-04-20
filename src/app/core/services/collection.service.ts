@@ -18,7 +18,6 @@ export class CollectionService {
   }
 
   getCollectionPhotosById(collectionId: string, page = 1): Observable<IPhoto[]> {
-    return this.http.get<IPhoto[]>(`${environment.apiUrl}/collections/${collectionId}/photos`, { params: { page, per_page: 15 } });
+    return this.http.get<IPhoto[]>(`${environment.apiUrl}/collections/${collectionId}/photos`, { params: { page, per_page: 10 } });
   }
-
 }
