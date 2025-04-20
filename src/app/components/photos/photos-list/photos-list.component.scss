@@ -10,9 +10,9 @@
   padding-bottom: 24px;
 
   .photo-container {
-    columns: 3 400px;
-    column-gap: 10px;
     overflow-y: auto;
+    columns: 3;
+    column-gap: 10px;
 
     .photo-wrapper {
       position: relative;
