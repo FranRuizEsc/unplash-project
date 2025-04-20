@@ -42,6 +42,7 @@ export class UserDetailComponent {
     this.activeLink.set(this.route.snapshot.firstChild?.routeConfig?.path || 'photos');
   }
 
+
   protected goToSocialMedia(event: Event) {
     const url = (event.target as HTMLSelectElement).value;
     if (url) {
@@ -50,7 +51,7 @@ export class UserDetailComponent {
     }
   }
 
-  protected goTolocationSearch(location: string) {
+  protected goToLocationSearch(location: string) {
     if (location) {
       this.router.navigate(['/search'], { queryParams: { searchTerm: location } });
     }

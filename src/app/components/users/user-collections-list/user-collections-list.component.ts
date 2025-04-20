@@ -17,14 +17,14 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   styleUrl: './user-collections-list.component.scss',
 })
 export class UserCollectionsListComponent implements OnInit {
-
   userName = input.required<string>();
 
   private userService = inject(UserService);
-  private collectionService = inject(CollectionService)
+  private collectionService = inject(CollectionService);
   private router = inject(Router);
   private page = 1;
   private hasMoreCollections = true;
+
 
   protected collections$$ = signal<ICollection[]>([]);
   protected isLoading: boolean = false;

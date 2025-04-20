@@ -19,12 +19,15 @@
   height: 100%;
 
   .collection-item {
-    width: 450px;
+    width: 100%;
+    max-width: 450px;
+    box-sizing: border-box;
 
     .collection-photo-container {
       position: relative;
       height: 250px;
       overflow: hidden;
+      transition: transform 0.2s ease;
 
       .photo-card {
         position: absolute;
@@ -34,8 +37,7 @@
 
       &:hover {
         filter: brightness(1.2);
-        height: 255px;
-        width: 455px;
+        transform: scale(1.02);
         cursor: pointer;
       }
 
@@ -70,12 +72,14 @@
       .title {
         font-weight: bold;
         word-wrap: break-word;
+        overflow-wrap: break-word;
       }
 
       .description {
         color: #666;
         font-size: 12px;
         word-wrap: break-word;
+        overflow-wrap: break-word;
       }
 
       .total {
